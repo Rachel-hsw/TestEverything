@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.pc.testeverything.ActivityDialog">
+
+
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:background="#6cb3ff"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="40dp"
+            android:text="升级提醒" />
+
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_below="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:minHeight="40dp"
+            android:text="新升级萌萌的，快点升级吧，惊喜多多哦！！！！" />
+
+
+        <TextView
+            android:id="@+id/bt"
+            android:layout_below="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp"
+            android:gravity="center"
+            android:text="下载" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

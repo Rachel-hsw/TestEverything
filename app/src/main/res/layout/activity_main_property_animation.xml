@@ -1,0 +1,173 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.animation.MainActivity" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/alpha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="渐渐消失" />
+
+        <Button
+            android:id="@+id/rotate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="旋转360" />
+
+        <Button
+            android:id="@+id/translationX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="左右移动" />
+
+        <Button
+            android:id="@+id/translationY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上下移动" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/scaleX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="左右拉伸" />
+
+    <Button
+        android:id="@+id/scaleY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上下拉伸" />
+    <Button
+        android:id="@+id/EraseAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="擦除动画" />
+    <Button
+        android:id="@+id/CutAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="切割动画" />
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="动画样例"
+        android:textSize="30sp"
+        android:textColor="#00EE00" />
+    <com.example.pc.testeverything.MyTextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="动画样例"
+        android:textSize="30sp"
+        android:textColor="#00EE00" />
+    <com.example.pc.testeverything.MyTextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="动画样例"
+        android:textSize="30sp"
+        android:textColor="#00EE00" />
+    <com.example.pc.testeverything.MyTextView
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="动画样例"
+        android:textSize="30sp"
+        android:textColor="#00EE00" />
+    <!--  使用默认的sans字体-->
+    <TextView
+        android:id="@+id/sans"
+        android:text="Chess a, a Book A, a count a, also known as the yellow three a. The recluse of the river and the lake. It is recognized that the nineteen first, the cursive script and the Yin and Yang prophecy first, enjoyed the world "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:typeface="sans" />
+    <!--  使用默认的serifs字体-->
+    <TextView
+        android:id="@+id/serif"
+        android:text="Chess a, a Book A, a count a, also known as the yellow three a. The recluse of the river and the lake. It is recognized that the nineteen first, the cursive script and the Yin and Yang prophecy first, enjoyed the world "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:typeface="serif"></TextView>
+
+    <!--  使用默认的monospace字体-->
+    <TextView
+        android:id="@+id/monospace"
+        android:text="Chess a, a Book A, a count a, also known as the yellow three a. The recluse of the river and the lake. It is recognized that the nineteen first, the cursive "
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:typeface="monospace" />
+    <!--  使用默认的sans字体-->
+    <TextView
+        android:id="@+id/sanst"
+        android:text="KKKKKK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:typeface="sans" />
+    <!--  使用默认的serifs字体-->
+    <TextView
+        android:id="@+id/serift"
+        android:text="KKKKKK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:typeface="serif"></TextView>
+
+    <!--  使用默认的monospace字体-->
+    <TextView
+        android:id="@+id/monospacet"
+        android:text="KKKKKK"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:typeface="monospace" />
+
+    <!--  使用默认的sans字体-->
+    <TextView
+        android:id="@+id/sansc"
+        android:text="汉语，汉族的语言，中国的通用语言。国际通用语言之一。属汉藏语系，同中国境内的藏语、壮语、傣语、侗语、黎语、彝语、苗语、瑶语等，中国境外的泰语、缅甸语等都是亲属语言。"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:typeface="sans" />
+    <!--  使用默认的serifs字体-->
+    <TextView
+        android:id="@+id/serifc"
+        android:text="汉语，汉族的语言，中国的通用语言。国际通用语言之一。属汉藏语系，同中国境内的藏语、壮语、傣语、侗语、黎语、彝语、苗语、瑶语等，中国境外的泰语、缅甸语等都是亲属语言。"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:typeface="serif" />
+    <TextView
+        android:id="@+id/monospacec"
+        android:text="汉语，汉族的语言，中国的通用语言。国际通用语言之一。属汉藏语系，同中国境内的藏语、壮语、傣语、侗语、黎语、彝语、苗语、瑶语等，中国境外的泰语、缅甸语等都是亲属语言。"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:typeface="monospace" />
+    <ImageView
+        android:id="@+id/view"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/ic_launcher"/>
+
+
+</LinearLayout>

@@ -7,10 +7,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by PC on 2018/5/30.
+ * 把Activity作为一个弹框
  */
 
-public class ActivityDialog extends Activity {
+public class DialogActivity extends Activity {
 
 
     private TextView bt;
@@ -23,7 +23,7 @@ public class ActivityDialog extends Activity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ActivityDialog.this,"后台下载中",Toast.LENGTH_SHORT).show();
+                Toast.makeText(DialogActivity.this,"后台下载中",Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

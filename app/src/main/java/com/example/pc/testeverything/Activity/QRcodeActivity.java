@@ -1,23 +1,24 @@
-package com.example.pc.testeverything;
+package com.example.pc.testeverything.Activity;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.example.pc.testeverything.MqttManager;
+import com.example.pc.testeverything.PopupQrCodeDialog;
+import com.example.pc.testeverything.R;
+import com.example.pc.testeverything.ZXingUtils;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
-
-public class qrcode extends AppCompatActivity {
+/**
+ * 生成二维码，弹出二维码
+ */
+public class QRcodeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,8 @@ public class qrcode extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this);
 
-      /*  Resources res = qrcode.this.getResources();
-        Bitmap bitmap= BitmapFactory.decodeResource(res, R.mipmap.qrcode);// 这里是获取图片Bitmap，也可以传入其他参数到Dialog中*/
+      /*  Resources res = QRcodeActivity.this.getResources();
+        Bitmap bitmap= BitmapFactory.decodeResource(res, R.mipmap.QRcodeActivity);// 这里是获取图片Bitmap，也可以传入其他参数到Dialog中*/
         Bitmap bitmap = ZXingUtils.createQRImage("{\"type\":\"predeploy\",\"hardworkKey\":\"xxx\"}",800,800 );
         PopupQrCodeDialog.Builder dialogBuild = new PopupQrCodeDialog.Builder(this);
         dialogBuild.setImage(bitmap);

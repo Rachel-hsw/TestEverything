@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.pc.testeverything.Activity.MainFragmentActivity;
+import com.example.pc.testeverything.Activity.OkHttpActivity;
 import com.example.pc.testeverything.Activity.QRcodeActivity;
 import com.example.pc.testeverything.Activity.TestLayoutActivity;
 import com.example.pc.testeverything.R;
@@ -65,8 +67,13 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
                         mContext.startActivity(intent1);
                         break;
                     case 2:
-                        Intent intent2 = new Intent(mContext,  QRcodeActivity.class);
+                        //下单
+                        Intent intent2 = new Intent(mContext,  OkHttpActivity.class);
                         mContext.startActivity(intent2);
+                        break;
+                    case 3:
+                        Intent intent3 = new Intent(mContext,  MainFragmentActivity.class);
+                        mContext.startActivity(intent3);
                         break;
                 }
                /* Intent intent = new Intent(mContext, FruitActivity.class);

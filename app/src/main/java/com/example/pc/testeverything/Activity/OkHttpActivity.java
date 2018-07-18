@@ -54,6 +54,7 @@ public class OkHttpActivity extends AppCompatActivity {
     private String time;
     private int headnum;
     private int middle;
+    private String orderNumber;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,7 +131,7 @@ public class OkHttpActivity extends AppCompatActivity {
                                 .url(URL);
                         JSONObject request = new JSONObject();
                         String orderString = getOrderId(i, orderid);
-
+                        orderNumber= headnum + middle + orderString;
                         request.put("number", headnum + middle + orderString);
                         request.put("store", "1001");
                         request.put("ctime", 1531574708);
@@ -165,6 +166,12 @@ public class OkHttpActivity extends AppCompatActivity {
                         int code = jsonObject.getInteger("code");
                         if (code == 0) {
                             Log.e("asd", "成功");
+                           /* runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(OkHttpActivity.this,"成功"+ orderNumber,Toast.LENGTH_LONG);
+                                }
+                        });*/
                         } else {
                             if (code == 2000) {
                                 String msg = jsonObject.getString("msg");

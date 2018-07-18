@@ -1,4 +1,4 @@
-package com.example.pc.testeverything.Fragment;
+package com.example.pc.testeverything.Activity;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.pc.testeverything.Fragment.AnotherRightFragment;
+import com.example.pc.testeverything.Fragment.RightFragment;
 import com.example.pc.testeverything.R;
 
 /**
@@ -20,8 +22,8 @@ import com.example.pc.testeverything.R;
 
 public class MainFragmentActivity extends Activity implements View.OnClickListener {
      private  int  i=0;
-     private  AnotherRightFragment anotherRightFragment;
-     private  RightFragment rightFragment;
+     private AnotherRightFragment anotherRightFragment;
+     private RightFragment rightFragment;
 
 
     /**

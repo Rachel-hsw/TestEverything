@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private int i = 0;
     private Button button;
     private Fruit[] fruits = {new Fruit("弹出二维码", R.mipmap.fox), new Fruit("约束布局", R.mipmap.fox),
-            new Fruit("Apple", R.mipmap.fox),new Fruit("Apple", R.mipmap.fox),
+            new Fruit("下单", R.mipmap.fox),new Fruit("碎片", R.mipmap.fox),
             new Fruit("Apple", R.mipmap.fox),new Fruit("Apple", R.mipmap.fox),
             new Fruit("Apple", R.mipmap.fox),new Fruit("Apple", R.mipmap.fox)
     };
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        //开启子线程
-        updateTextAtThread();
+        //开启子线程，验证子线程是否可以更新已经处于Pause状态的activity
+      /*  updateTextAtThread();*/
         Log.i("testhsw", "主线程1");
         //弹出加载框
         showDialog();

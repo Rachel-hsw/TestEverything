@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TestEverything.iml" filepath="$PROJECT_DIR$/TestEverything.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/log/log.iml" filepath="$PROJECT_DIR$/log/log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/threadmanager/threadmanager.iml" filepath="$PROJECT_DIR$/threadmanager/threadmanager.iml" />
     </modules>
   </component>
 </project>

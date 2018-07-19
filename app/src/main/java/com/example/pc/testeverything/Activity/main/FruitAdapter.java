@@ -15,6 +15,7 @@ import com.example.pc.testeverything.Activity.MainFragmentActivity;
 import com.example.pc.testeverything.Activity.OkHttpActivity;
 import com.example.pc.testeverything.Activity.QRcodeActivity;
 import com.example.pc.testeverything.Activity.TestLayoutActivity;
+import com.example.pc.testeverything.Activity.culActivity;
 import com.example.pc.testeverything.R;
 
 import java.util.List;
@@ -74,6 +75,10 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
                     case 3:
                         Intent intent3 = new Intent(mContext,  MainFragmentActivity.class);
                         mContext.startActivity(intent3);
+                        break;
+                    case 4:
+                        Intent intent4 = new Intent(mContext,  culActivity.class);
+                        mContext.startActivity(intent4);
                         break;
                 }
                /* Intent intent = new Intent(mContext, FruitActivity.class);

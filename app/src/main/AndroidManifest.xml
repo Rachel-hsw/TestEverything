@@ -33,6 +33,7 @@
             android:theme="@style/CustomActivityDialogStyle"/>
         <activity android:name=".Activity.MainFragmentActivity" />
         <activity android:name=".Activity.OkHttpActivity" />
+        <activity android:name=".Activity.culActivity" />
 
         <service android:name=".MyService" />
         <!-- Mqtt Service -->

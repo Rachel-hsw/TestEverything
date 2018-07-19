@@ -15,6 +15,8 @@ import com.example.pc.testeverything.Activity.main.Fruit;
 import com.example.pc.testeverything.Activity.main.FruitAdapter;
 import com.example.pc.testeverything.DialogActivity;
 import com.example.pc.testeverything.R;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -56,6 +58,32 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new FruitAdapter(fruitList);
         recyclerView.setAdapter(adapter);
+        long i=229;
+        float w=(float) 229/100;
+        double e=6.5558888888888885;
+
+        float r =3.777f;
+        int a=7;
+        int b=6;
+        DecimalFormat df=new DecimalFormat("0.00");
+
+        System.out.println(df.format((float)a/b));
+        String s = "10001.0110000";
+        if(s.indexOf(".") > 0){
+            //正则表达
+            s = s.replaceAll("0+$", "");//去掉后面无用的零
+          /*  s = s.replaceAll("[.]$", "");//如小数点后面全是零则去掉小数点*/
+        }
+        System.out.println(s);
+        Math.sqrt(9);
+        Double d = new Double("1234567890.12");
+        System.out.println("d:="+d);//d:1.23456789012E9
+        java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
+        nf.setGroupingUsed(false);
+        System.out.println("d:="+nf.format(d));//nf.format(d):1234567890.12
+        double u=9;
+        System.out.println("d:="+u);//nf.format(d):1234567890.12
+
     }
     private void initFruits() {
         fruitList.clear();

@@ -14,8 +14,8 @@ public class SoundPoolActivity extends Activity {
 
     Button playButton;
     SoundPool sp;
-    int soundID_1,soundID_2;
-    int streamID_1,streamID_2;
+    int soundID_1;
+    int streamID_1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +26,12 @@ public class SoundPoolActivity extends Activity {
         soundID_1=sp.load(getApplicationContext(), R.raw.dingdong, 1);
 
         playButton=(Button)findViewById(R.id.play);
+        SpeackUtils.getInstance().play();
         playButton.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                streamID_1=sp.play(soundID_1, 0.8f, 0.8f,1, -1, 1.0f);
-
+                streamID_1=sp.play(soundID_1, 0.8f, 0.8f,1, 1, 1.0f);
             }
         });
     }

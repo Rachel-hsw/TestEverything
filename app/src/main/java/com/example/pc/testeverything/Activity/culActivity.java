@@ -1,814 +1,213 @@
 package com.example.pc.testeverything.Activity;
 
-import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import android.support.annotation.RequiresApi;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import com.example.pc.testeverything.R;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
- * Created by PC on 2018/7/19.
+ * 目前还有超级多问题
  */
+public class culActivity extends AppCompatActivity implements View.OnClickListener {
 
-public class culActivity extends Activity implements View.OnClickListener {
-    /**
-     * 数字
-     */
-    private Button num0;
-    private Button num1;
-    private Button num2;
-    private Button num3;
-    private Button num4;
-    private Button num5;
-    private Button num6;
-    private Button num7;
-    private Button num8;
-    private Button num9;
-    /**
-     * 运算符
-     */
-    private Button plus_btn;
-    private Button subtract_btn;
-    private Button multiply_btn;
-    private Button divide_btn;
-    private Button equal_btn;
-    /**
-     * 其他
-     */
-    private Button dot_btn;
-    private Button percent_btn;
-    private Button delete_btn;
-    private Button ac_btn;
-    /**
-     * 结果
-     */
-    private EditText mResultText;
-    /**
-     * 已经输入的字符
-     */
-    private String existedText = "";
-    /**
-     * 是否计算过
-     */
-    private boolean isCounted = false;
-    /**
-     * 以负号开头，且运算符不是是减号
-     * 例如：-21×2
-     */
-    private boolean startWithOperator = false;
-    /**
-     * 以负号开头，且运算符是减号
-     * 例如：-21-2
-     */
-    private boolean startWithSubtract = false;
-    /**
-     * 不以负号开头，且包含运算符
-     * 例如：21-2
-     */
-    private boolean noStartWithOperator = false;
+    Button btn_0, btn_1, btn_2, btn_3, btn_4, btn_5,
+            btn_6, btn_7, btn_8, btn_9, btn_equal,
+            btn_point, btn_clean, btn_del, btn_add,
+            btn_subtract, btn_multiply, btn_divide;
+    EditText et_result;
+    EditText et_cul;
 
+    boolean clear_flag;
+    BigDecimal leftVal = new BigDecimal("0");
+    BigDecimal culVal = new BigDecimal("0");
+    StringBuilder culValString = new StringBuilder("0");
+    StringBuilder resultSting = new StringBuilder("0");
+    String method = "";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initView();
-        initEvent();
-
-    }
-
-    /**
-     * 初始化控件
-     */
-    private void initView() {
-        /**
-         * 数字
-         */
-        num0 = (Button) findViewById(R.id.button0);
-        num1 = (Button) findViewById(R.id.button1);
-        num2 = (Button) findViewById(R.id.button2);
-        num3 = (Button) findViewById(R.id.button3);
-        num4 = (Button) findViewById(R.id.button4);
-        num5 = (Button) findViewById(R.id.button5);
-        num6 = (Button) findViewById(R.id.button6);
-        num7 = (Button) findViewById(R.id.button7);
-        num8 = (Button) findViewById(R.id.button8);
-        num9 = (Button) findViewById(R.id.button9);
-        /**
-         * 运算符
-         */
-        plus_btn = (Button) findViewById(R.id.plus);
-        subtract_btn = (Button) findViewById(R.id.plus);
-        multiply_btn = (Button) findViewById(R.id.plus);
-        divide_btn = (Button) findViewById(R.id.chu);
-        equal_btn = (Button) findViewById(R.id.equal);
-        /**
-         * 其他
-         */
-        dot_btn = (Button) findViewById(R.id.dot);
-        percent_btn = (Button) findViewById(R.id.plus);
-        delete_btn = (Button) findViewById(R.id.plus);
-        ac_btn = (Button) findViewById(R.id.ac);
-        /**
-         * 结果
-         */
-        mResultText = (EditText) findViewById(R.id.editText1);
-        /**
-         * 已经输入的字符
-         */
-        existedText = mResultText.getText().toString();
+        setContentView(R.layout.cul_layout_hh);
+        btn_0 = (Button) findViewById(R.id.btn_0);
+        btn_1 = (Button) findViewById(R.id.btn_1);
+        btn_2 = (Button) findViewById(R.id.btn_2);
+        btn_3 = (Button) findViewById(R.id.btn_3);
+        btn_4 = (Button) findViewById(R.id.btn_4);
+        btn_5 = (Button) findViewById(R.id.btn_5);
+        btn_6 = (Button) findViewById(R.id.btn_6);
+        btn_7 = (Button) findViewById(R.id.btn_7);
+        btn_8 = (Button) findViewById(R.id.btn_8);
+        btn_9 = (Button) findViewById(R.id.btn_9);
+        btn_clean = (Button) findViewById(R.id.btn_clean);
+        btn_equal = (Button) findViewById(R.id.btn_equal);
+        btn_subtract = (Button) findViewById(R.id.btn_subtract);
+        btn_multiply = (Button) findViewById(R.id.btn_multiplay);
+        btn_add = (Button) findViewById(R.id.btn_add);
+        btn_point = (Button) findViewById(R.id.btn_point);
+        btn_del = (Button) findViewById(R.id.btn_del);
+        btn_divide = (Button) findViewById(R.id.btn_divide);
+        et_cul = (EditText) findViewById(R.id.et_input);
+        et_result = (EditText) findViewById(R.id.et_result);
+        btn_0.setOnClickListener(this);
+        btn_1.setOnClickListener(this);
+        btn_2.setOnClickListener(this);
+        btn_3.setOnClickListener(this);
+        btn_4.setOnClickListener(this);
+        btn_5.setOnClickListener(this);
+        btn_6.setOnClickListener(this);
+        btn_7.setOnClickListener(this);
+        btn_8.setOnClickListener(this);
+        btn_9.setOnClickListener(this);
+        btn_equal.setOnClickListener(this);
+        btn_subtract.setOnClickListener(this);
+        btn_multiply.setOnClickListener(this);
+        btn_divide.setOnClickListener(this);
+        btn_del.setOnClickListener(this);
+        btn_point.setOnClickListener(this);
+        btn_add.setOnClickListener(this);
+        btn_clean.setOnClickListener(this);
+        et_cul.setOnClickListener(this);
+        et_result.setOnClickListener(this);
+        et_cul.setText("0");
 
     }
 
-    /**
-     * 初始化事件
-     */
-    private void initEvent() {
-        num0.setOnClickListener(this);
-        num1.setOnClickListener(this);
-        num2.setOnClickListener(this);
-        num3.setOnClickListener(this);
-        num4.setOnClickListener(this);
-        num5.setOnClickListener(this);
-        num6.setOnClickListener(this);
-        num7.setOnClickListener(this);
-        num8.setOnClickListener(this);
-        num9.setOnClickListener(this);
-
-        plus_btn.setOnClickListener(this);
-        subtract_btn.setOnClickListener(this);
-        multiply_btn.setOnClickListener(this);
-        divide_btn.setOnClickListener(this);
-        equal_btn.setOnClickListener(this);
-
-        dot_btn.setOnClickListener(this);
-        percent_btn.setOnClickListener(this);
-        delete_btn.setOnClickListener(this);
-        ac_btn.setOnClickListener(this);
-    }
-
-    /**
-     * 点击事件
-     * @param v  点击的控件
-     */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
+        String str = et_cul.getText().toString();
+        switch (v.getId()) {
+            case R.id.btn_point:
+                if (!culValString.toString().contains(".")) {
+                    culValString = culValString.append(((Button) v).getText().toString().toString());
+                    resultSting = resultSting.append(((Button) v).getText().toString());
+                    et_cul.setText(culValString);
+                    et_result.setText(resultSting);
 
-        switch (v.getId()){
-            /**
-             * 数字
-             */
-            case R.id.button0:
-                existedText = isOverRange(existedText,"0");
-                break;
-            case R.id.button1:
-                existedText = isOverRange(existedText,"1");
-                break;
-            case R.id.button2:
-                existedText = isOverRange(existedText,"2");
-                break;
-            case R.id.button3:
-                existedText = isOverRange(existedText,"3");
-                break;
-            case R.id.button4:
-                existedText = isOverRange(existedText,"4");
-                break;
-            case R.id.button5:
-                existedText = isOverRange(existedText,"5");
-                break;
-            case R.id.button6:
-                existedText = isOverRange(existedText,"6");
-                break;
-            case R.id.button7:
-                existedText = isOverRange(existedText,"7");
-                break;
-            case R.id.button8:
-                existedText = isOverRange(existedText,"8");
-                break;
-            case R.id.button9:
-                existedText = isOverRange(existedText,"9");
-                break;
-            /**
-             * 运算符
-             */
-            case R.id.plus:
-                /**
-                 * 判断已有的字符是否是科学计数
-                 * 是 置零
-                 * 否 进行下一步
-                 *
-                 * 判断表达式是否可以进行计算
-                 * 是 先计算再添加字符
-                 * 否 添加字符
-                 *
-                 * 判断计算后的字符是否是 error
-                 * 是 置零
-                 * 否 添加运算符
-                 */
-                if (!existedText.contains("e")) {
-
-                    if (judgeExpression()) {
-                        existedText = getResult();
-                        if (existedText.equals("error")){
-
-                        } else {
-                            existedText += "+";
-                        }
-                    } else {
-
-                        if (isCounted) {
-                            isCounted = false;
-                        }
-
-                        if ((existedText.substring(existedText.length() - 1)).equals("-")) {
-                            existedText = existedText.replace("-", "+");
-                        } else if ((existedText.substring(existedText.length() - 1)).equals("×")) {
-                            existedText = existedText.replace("×", "+");
-                        } else if ((existedText.substring(existedText.length() - 1)).equals("÷")) {
-                            existedText = existedText.replace("÷", "+");
-                        } else if (!(existedText.substring(existedText.length() - 1)).equals("+")) {
-                            existedText += "+";
-                        }
-                    }
-                } else {
-                    existedText = "0";
-                }
-
-                break;
-      /*      case R.id.plus:
-
-                if (!existedText.contains("e")) {
-                    if (judgeExpression()) {
-                        existedText = getResult();
-                        if (existedText.equals("error")){
-
-                        } else {
-                            existedText += "-";
-                        }
-                    } else {
-
-                        if (isCounted) {
-                            isCounted = false;
-                        }
-
-                        if ((existedText.substring(existedText.length() - 1)).equals("+")) {
-//                    Log.d("Anonymous", "onClick: " + "进入减法方法");
-                            existedText = existedText.replace("+", "-");
-                        } else if ((existedText.substring(existedText.length() - 1)).equals("×")) {
-                            existedText = existedText.replace("×", "-");
-                        } else if ((existedText.substring(existedText.length() - 1)).equals("÷")) {
-                            existedText = existedText.replace("÷", "-");
-                        } else if (!(existedText.substring(existedText.length() - 1)).equals("-")) {
-                            existedText += "-";
-                        }
-                    }
-                } else {
-                    existedText = "0";
                 }
                 break;
-            case R.id.plus:
+            case R.id.btn_0:
+            case R.id.btn_1:
+            case R.id.btn_2:
+            case R.id.btn_3:
+            case R.id.btn_4:
+            case R.id.btn_5:
+            case R.id.btn_6:
+            case R.id.btn_7:
+            case R.id.btn_8:
+            case R.id.btn_9:
+                if (culValString.toString().startsWith("0") && !culValString.toString().contains(".")) {
+                    resultSting = new StringBuilder("");
+                    culValString = new StringBuilder("");
 
-                if (!existedText.contains("e")) {
-                    if (judgeExpression()) {
-                        existedText = getResult();
-                        if (existedText.equals("error")){
-
-                        } else {
-                            existedText += "×";
-                        }
-
-                    } else {
-
-                        if (isCounted) {
-                            isCounted = false;
-                        }
-
-                        if ((existedText.substring(existedText.length() - 1)).equals("+")) {
-                            existedText = existedText.replace("+", "×");
-                        } else if ((existedText.substring(existedText.length() - 1)).equals("-")) {
-                            existedText = existedText.replace("-", "×");
-                        } else if ((existedText.substring(existedText.length() - 1)).equals("÷")) {
-                            existedText = existedText.replace("÷", "×");
-                        } else if (!(existedText.substring(existedText.length() - 1)).equals("×")) {
-                            existedText += "×";
-                        }
-                    }
-                } else {
-                    existedText = "0";
+                }
+                resultSting = resultSting.append(((Button) v).getText().toString());
+                culValString = culValString.append(((Button) v).getText().toString());
+                culVal = new BigDecimal(culValString.toString());
+                et_cul.setText(culValString);
+                et_result.setText(resultSting);
+                break;
+            case R.id.btn_add:
+            case R.id.btn_subtract:
+            case R.id.btn_multiplay:
+            case R.id.btn_divide:
+                switch (((Button) v).getText().toString()) {
+                    case "+":
+                        method = "add";
+                        break;
+                    case "-":
+                        method = "subtract";
+                        break;
+                    case "x":
+                        method = "multiplay";
+                        break;
+                    case "/":
+                        method = "divide";
+                        break;
+                }
+                culValString = new StringBuilder("");
+                if (!resultSting.toString().contains("+")&&!resultSting.toString().contains("x")&&!resultSting.toString().contains("-")&&!resultSting.toString().contains("/")&&resultSting.lastIndexOf("+") != resultSting.length() - 1&&resultSting.lastIndexOf("-")!= resultSting.length() - 1&&resultSting.lastIndexOf("x") != resultSting.length() - 1&&resultSting.lastIndexOf("/")!= resultSting.length() - 1) {
+                    resultSting = resultSting.append(((Button) v).getText().toString());
+                    leftVal = culVal;
+                    culVal=new BigDecimal("0");
+                    et_result.setText(resultSting);
                 }
                 break;
-            case R.id.plus:
-
-                if (!existedText.contains("e")) {
-                    if (judgeExpression()) {
-                        existedText = getResult();
-                        if (existedText.equals("error")){
-
-                        } else {
-                            existedText += "÷";
-                        }
-
-                    } else {
-
-                        if (isCounted) {
-                            isCounted = false;
-                        }
-
-                        if ((existedText.substring(existedText.length() - 1)).equals("+")) {
-                            existedText = existedText.replace("+", "÷");
-                        } else if ((existedText.substring(existedText.length() - 1)).equals("-")) {
-                            existedText = existedText.replace("-", "÷");
-                        } else if ((existedText.substring(existedText.length() - 1)).equals("×")) {
-                            existedText = existedText.replace("×", "÷");
-                        } else if (!(existedText.substring(existedText.length() - 1)).equals("÷")) {
-                            existedText += "÷";
-                        }
-                    }
-                } else {
-                    existedText = "0";
-                }
+            case R.id.btn_clean:
+                clearCount();
+                et_cul.setText(culValString);
+                et_result.setText(resultSting);
                 break;
-            case R.id.equal:
-                existedText = getResult();
-                isCounted = true;
-                break;
-            *//**
-             * 其他
-             */
-            case R.id.dot:
-                /**
-                 * 判断是否运算过
-                 * 否
-                 *   判断是否有运算符，有 判断运算符之后的数字，无 判断整个数字
-                 *   判断数字是否过长，是则不能添加小数点，否则可以添加
-                 *   判断已经存在的数字里是否有小数点
-                 * 是
-                 *   字符串置为 0.
-                 */
-                if (!isCounted){
+            case R.id.btn_del:
+                if (culValString.toString().length()==1){
+                    culValString=new StringBuilder("0");
+                }else if (culValString.toString().length()>1){
+                    culValString=new StringBuilder(culValString.toString().substring(0,culValString.toString().length()-1));
 
-                    if (existedText.contains("+") || existedText.contains("-") ||
-                            existedText.contains("×") || existedText.contains("÷") ){
-
-                        String param1 = null;
-                        String param2 = null;
-
-                        if (existedText.contains("+")) {
-                            param1 = existedText.substring(0, existedText.indexOf("+"));
-                            param2 = existedText.substring(existedText.indexOf("+") + 1);
-                        } else if (existedText.contains("-")) {
-                            param1 = existedText.substring(0, existedText.indexOf("-"));
-                            param2 = existedText.substring(existedText.indexOf("-") + 1);
-                        } else if (existedText.contains("×")) {
-                            param1 = existedText.substring(0, existedText.indexOf("×"));
-                            param2 = existedText.substring(existedText.indexOf("×") + 1);
-                        } else if (existedText.contains("÷")) {
-                            param1 = existedText.substring(0, existedText.indexOf("÷"));
-                            param2 = existedText.substring(existedText.indexOf("÷") + 1);
-                        }
-                        Log.d("Anonymous param1",param1);
-                        Log.d("Anonymous param2",param2);
-
-                        boolean isContainedDot = param2.contains(".");
-                        if (param2.length() >= 9){
-
-                        } else if (!isContainedDot){
-                            if (param2.equals("")){
-                                existedText += "0.";
-                            } else {
-                                existedText += ".";
-                            }
-                        } else {
-                            return;
-                        }
-                    } else {
-                        boolean isContainedDot = existedText.contains(".");
-                        if (existedText.length() >= 9){
-
-                        } else if (!isContainedDot){
-                            existedText += ".";
-                        } else {
-                            return;
-                        }
-                    }
-                    isCounted = false;
-
-                } else {
-                    existedText = "0.";
-                    isCounted = false;
                 }
-
-
+                et_cul.setText(culValString);
                 break;
-           /* case R.id.plus:
-                *//**
-                 * 判断数字是否有运算符
-                 * 是 不做任何操作
-                 * 否 进行下一步
-                 *
-                 * 判断数字是否是 0
-                 * 是 不做任何操作
-                 * 否 进行除百
-                 *
-                 * 将字符串转换成double类型，进行运算后，再转换成String型
-                 *//*
-                if (existedText.equals("error")){
-
-                } else {
-
-                    getCondition();
-
-                    if (startWithOperator || startWithSubtract || noStartWithOperator) {
-
-                    } else {
-                        if (existedText.equals("0")) {
-                            return;
-                        } else {
-                            double temp = Double.parseDouble(existedText);
-                            temp = temp / 100;
-                            existedText = String.valueOf(temp);
+            case R.id.btn_equal:
+                if (leftVal.toString().equals("0")){
+                    et_cul.setText(culValString);
+                    break;
+                }
+                if (culVal.toString().equals("0")){
+                    et_cul.setText("错误的输入");
+                    clearCount();
+                    break;
+                }
+                //直接用Double类型计算，会有精度问题
+                BigDecimal result = null;
+                switch (method) {
+                    case "add":
+                        result =leftVal.add(culVal);
+                        break;
+                    case "subtract":
+                        result =leftVal.subtract(culVal);
+                        break;
+                    case "multiplay":
+                        result =leftVal.multiply(culVal);
+                        break;
+                    case "divide":
+                        if (culVal.toString().equals("0")){
+                            break;
                         }
-                    }
+                        result =leftVal.divide(culVal,15, RoundingMode.HALF_UP);
+                        break;
                 }
+                if (culVal.toString().equals("0")){
+                    et_cul.setText("错误的输入");
+                }else{
+                    culValString = new StringBuilder(String.valueOf(result).replaceAll("0+$", "").replaceAll("[.]$", ""));
+                    et_cul.setText(culValString);
+                }
+                culVal =result;
+                leftVal = new BigDecimal("0");
+                method = "";
+                resultSting = new StringBuilder("0");
+                culValString = new StringBuilder("0");
                 break;
-            case R.id.delete_btn:
-                *//**
-                 * 字符串长度大于 0 时才截取字符串
-                 * 如果长度为 1，则直接把字符串设置为 0
-                 *//*
-                if (existedText.equals("error")){
-                    existedText = "0";
-                } else if (existedText.length() > 0){
-                    if (existedText.length() == 1) {
-                        existedText = "0";
-                    } else {
-                        existedText = existedText.substring(0,existedText.length()-1);
-                    }
-                }
-                break;*/
-            case R.id.ac:
-                existedText = "0";
+            default:
                 break;
         }
-        /**
-         * 设置显示
-         */
-        mResultText.setText(existedText);
     }
 
-
-
-    /**
-     * 进行运算，得到结果
-     * @return  返回结果
-     */
-    private String getResult() {
-
-        /**
-         * 结果
-         */
-        String tempResult = null;
-        /**
-         * 两个String类型的参数
-         */
-        String param1 = null;
-        String param2 = null;
-        /**
-         * 转换后的两个double类型的参数
-         */
-        double arg1 = 0;
-        double arg2 = 0;
-        double result = 0;
-
-        getCondition();
-
-        /**
-         * 如果有运算符，则进行运算
-         * 没有运算符，则把已经存在的数据再传出去
-         */
-        if ( startWithOperator || noStartWithOperator || startWithSubtract) {
-
-            if (existedText.contains("+")) {
-                /**
-                 * 先获取两个参数
-                 */
-                param1 = existedText.substring(0, existedText.indexOf("+"));
-                param2 = existedText.substring(existedText.indexOf("+") + 1);
-                /**
-                 * 如果第二个参数为空，则还是显示当前字符
-                 */
-                if (param2.equals("")){
-                    tempResult = existedText;
-                } else {
-                    /**
-                     * 转换String为Double
-                     * 计算后再转换成String类型
-                     * 进行正则表达式处理
-                     */
-                    arg1 = Double.parseDouble(param1);
-                    arg2 = Double.parseDouble(param2);
-                    result = arg1 + arg2;
-                    tempResult = String.format("%f", result);
-                    tempResult = subZeroAndDot(tempResult);
-                }
-
-
-            } else if (existedText.contains("×")) {
-
-                param1 = existedText.substring(0, existedText.indexOf("×"));
-                param2 = existedText.substring(existedText.indexOf("×") + 1);
-
-                if (param2.equals("")){
-                    tempResult = existedText;
-                } else {
-                    arg1 = Double.parseDouble(param1);
-                    arg2 = Double.parseDouble(param2);
-                    result = arg1 * arg2;
-                    tempResult = String.format("%f", result);
-                    tempResult = subZeroAndDot(tempResult);
-                }
-
-            } else if (existedText.contains("÷")) {
-
-                param1 = existedText.substring(0, existedText.indexOf("÷"));
-                param2 = existedText.substring(existedText.indexOf("÷") + 1);
-
-                if (param2.equals("0")){
-                    tempResult = "error";
-                } else if (param2.equals("")){
-                    tempResult = existedText;
-                } else {
-                    arg1 = Double.parseDouble(param1);
-                    arg2 = Double.parseDouble(param2);
-                    result = arg1 / arg2;
-                    tempResult = String.format("%f", result);
-                    tempResult = subZeroAndDot(tempResult);
-                }
-
-            } else if (existedText.contains("-")) {
-
-                /**
-                 * 这里是以最后一个 - 号为分隔去取出两个参数
-                 * 进到这个方法，必须满足有运算公式
-                 * 而又避免了第一个参数是负数的情况
-                 */
-                param1 = existedText.substring(0, existedText.lastIndexOf("-"));
-                param2 = existedText.substring(existedText.lastIndexOf("-") + 1);
-
-                if (param2.equals("")){
-                    tempResult = existedText;
-                } else {
-                    arg1 = Double.parseDouble(param1);
-                    arg2 = Double.parseDouble(param2);
-                    result = arg1 - arg2;
-                    tempResult = String.format("%f", result);
-                    tempResult = subZeroAndDot(tempResult);
-                }
-
-            }
-            /**
-             * 如果数据长度大于等于10位，进行科学计数
-             *
-             * 如果有小数点，再判断小数点前是否有十个数字，有则进行科学计数
-             */
-            if (tempResult.length() >= 10) {
-                tempResult = String.format("%e", Double.parseDouble(tempResult));
-            } else if (tempResult.contains(".")) {
-                if (tempResult.substring(0, tempResult.indexOf(".")).length() >= 10) {
-                    tempResult = String.format("%e", Double.parseDouble(tempResult));
-                }
-            }
-        } else {
-            tempResult = existedText;
-        }
-
-        return tempResult;
+    private void clearCount() {
+        leftVal = new BigDecimal("0");
+        culVal = new BigDecimal("0");
+        method = "";
+        resultSting = new StringBuilder("0");
+        culValString = new StringBuilder("0");
     }
-
-
-    /**
-     * 先判断是否按过等于号
-     * 是 按数字则显示当前数字
-     * 否 在已有的表达式后添加字符
-     *
-     * 判断数字是否就是一个 0
-     * 是 把字符串设置为空字符串。
-     *   1、打开界面没有运算过的时候，AC键归零或删除完归零的时候，会显示一个 0
-     *   2、当数字是 0 的时候，设置成空字符串，再按 0 ，数字会还是 0，不然可以按出 000 这种数字
-     * 否 添加按下的键的字符
-     *
-     * 判断数字是否包含小数点
-     * 是 数字不能超过十位
-     * 否 数字不能超过九位
-     *
-     * 进行上面的判断后，再判断数字是否超过长度限制
-     * 超过不做任何操作
-     * 没超过可以再添数字
-     */
-    private String isOverRange(String existedText, String s) {
-        /**
-         * 判断是否计算过
-         */
-        if (!isCounted){
-            /**
-             * 判断是否是科学计数
-             * 是 文本置零
-             */
-            if (existedText.contains("e")){
-                existedText = "0";
-            }
-            /**
-             * 判断是否只有一个 0
-             * 是 文本清空
-             */
-            if (existedText.equals("0")){
-                existedText = "";
-            }
-            /**
-             * 判断是否有运算符
-             * 是 判断第二个数字
-             * 否 判断整个字符串
-             */
-            if (existedText.contains("+") || existedText.contains("-") ||
-                    existedText.contains("×") || existedText.contains("÷")){
-                /**
-                 * 包括运算符时 两个数字 判断第二个数字
-                 * 两个参数
-                 */
-                String param2 = null;
-                if (existedText.contains("+")){
-                    param2 = existedText.substring(existedText.indexOf("+")+1);
-                } else if (existedText.contains("-")){
-                    param2 = existedText.substring(existedText.indexOf("-")+1);
-                } else if (existedText.contains("×")){
-                    param2 = existedText.substring(existedText.indexOf("×")+1);
-                } else if (existedText.contains("÷")){
-                    param2 = existedText.substring(existedText.indexOf("÷")+1);
-                }
-
-//            Log.d("Anonymous param1",param1);
-//            Log.d("Anonymous param2",param2);
-                if (existedText.substring(existedText.length()-1).equals("+") ||
-                        existedText.substring(existedText.length()-1).equals("-") ||
-                        existedText.substring(existedText.length()-1).equals("×") ||
-                        existedText.substring(existedText.length()-1).equals("÷")){
-                    existedText += s;
-                } else {
-                    if (param2.contains(".")){
-                        if (param2.length() >= 10){
-
-                        } else {
-                            existedText += s;
-                        }
-                    } else {
-                        if (param2.length() >= 9){
-
-                        } else {
-                            existedText += s;
-                        }
-                    }
-                }
-            } else {
-                /**
-                 * 不包括运算符时 一个数字
-                 */
-                if (existedText.contains(".")){
-                    if (existedText.length() >= 10){
-
-                    } else {
-                        existedText += s;
-                    }
-                } else {
-                    if (existedText.length() >= 9){
-
-                    } else {
-                        existedText += s;
-                    }
-                }
-            }
-
-            isCounted = false;
-
-        } else {
-
-            existedText = s;
-            isCounted = false;
-
-        }
-
-
-        return existedText;
-    }
-
-
-    /**
-     * 使用java正则表达式去掉多余的.与0
-     * @param s 传入的字符串
-     * @return 修改之后的字符串
-     */
-    public static String subZeroAndDot(String s){
-        if(s.indexOf(".") > 0){
-            s = s.replaceAll("0+?$", "");//去掉多余的0
-            s = s.replaceAll("[.]$", "");//如最后一位是.则去掉
-        }
-        return s;
-    }
-
-    /**
-     * 判断表达式
-     *
-     * 为了按等号是否进行运算
-     * 以及出现两个运算符（第一个参数如果为负数的符号不计）先进行运算再添加运算符
-     */
-    private boolean judgeExpression() {
-
-        getCondition();
-
-        String tempParam2 = null;
-
-        if ( startWithOperator || noStartWithOperator || startWithSubtract) {
-
-            if (existedText.contains("+")) {
-                /**
-                 * 先获取第二个参数
-                 */
-                tempParam2 = existedText.substring(existedText.indexOf("+") + 1);
-                /**
-                 * 如果第二个参数为空，表达式不成立
-                 */
-                if (tempParam2.equals("")) {
-                    return false;
-                } else {
-                    return true;
-                }
-            } else if (existedText.contains("×")) {
-
-                tempParam2 = existedText.substring(existedText.indexOf("×") + 1);
-
-                if (tempParam2.equals("")) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-            } else if (existedText.contains("÷")) {
-
-                tempParam2 = existedText.substring(existedText.indexOf("÷") + 1);
-
-                if (tempParam2.equals("")) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-            } else if (existedText.contains("-")) {
-
-                /**
-                 * 这里是以最后一个 - 号为分隔去取出两个参数
-                 * 进到这个方法，必须满足有运算公式
-                 * 而又避免了第一个参数是负数的情况
-                 */
-                tempParam2 = existedText.substring(existedText.lastIndexOf("-") + 1);
-
-                if (tempParam2.equals("")) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 取得判断条件
-     */
-    private void getCondition() {
-        /**
-         * 以负号开头，且运算符不是是减号
-         * 例如：-21×2
-         */
-        startWithOperator = existedText.startsWith("-") && ( existedText.contains("+") ||
-                existedText.contains("×") || existedText.contains("÷") );
-        /**
-         * 以负号开头，且运算符是减号
-         * 例如：-21-2
-         */
-        startWithSubtract = existedText.startsWith("-") && ( existedText.lastIndexOf("-") != 0 );
-        /**
-         * 不以负号开头，且包含运算符
-         * 例如：21-2
-         */
-        noStartWithOperator = !existedText.startsWith("-") && ( existedText.contains("+") ||
-                existedText.contains("-") || existedText.contains("×") || existedText.contains("÷"));
-    }
-
 }
-

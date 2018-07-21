@@ -80,6 +80,10 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
                         Intent intent4 = new Intent(mContext,  culActivity.class);
                         mContext.startActivity(intent4);
                         break;
+                    case 5:
+                        Intent intent5 = new Intent(mContext,  SoundPoolActivity.class);
+                        mContext.startActivity(intent5);
+                        break;
                 }
                /* Intent intent = new Intent(mContext, FruitActivity.class);
                 intent.putExtra(FruitActivity.FRUIT_NAME, fruit.getName());

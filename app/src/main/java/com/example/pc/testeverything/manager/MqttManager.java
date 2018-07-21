@@ -316,7 +316,6 @@ public class MqttManager {
      */
     private void sendMqttDisconnect(MqttEnity mqttEnity) {
         connectQueue.offer(false);
-        isFirstConnect =false;
         mqttEnity.getConnectCallback().connectCallback(false,"mqtt断开");
         // 上传设备状态
       //  EventBus.getDefault().post(new EBDeviceEntity(EVENT_BUS_DEVICE_REPORT_ERROR_STATUS));
@@ -327,24 +326,22 @@ public class MqttManager {
      */
     private void sendMqttConnect(final MqttEnity mqttEnity) {
         //第一次连接
-       if (!isFirstConnect){
-           isFirstConnect =true;
-       }
-        connectQueue.offer(true);
-        //如果第一次连接时间
-        new Timer().schedule(new TimerTask() {
+        ThreadManger.get().add(new ThreadListener() {
             @Override
-            public void run() {
+            public void doAction() {
                 try {
-                    if (mqttEnity.getConnectCallback() != null) {
-                        mqttEnity.getConnectCallback().connectCallback(false,"mqtt连接成功");
-                        connectQueue.clear();
-                    }
+                    connectQueue.clear();
+                    connectQueue.offer(true);
+                    Thread.sleep(3000);
+                   if (connectQueue.size()==1&&connectQueue.poll()==true){
+                       mqttEnity.getConnectCallback().connectCallback(true,"mqtt连接成功");
+                   }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        },3000);//延时1s执行
+        });
+        //如果第一次连接时间
 
 
     }

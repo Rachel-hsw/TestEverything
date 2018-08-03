@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -18,7 +20,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.MainActivity">
 <!--
-        <activity android:name=".PropertyAnimation">
+        <activity android:name=".PropertyAnimationActivity">
 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +37,20 @@
         <activity android:name=".Activity.OkHttpActivity" />
         <activity android:name=".Activity.culActivity" />
         <activity android:name=".Activity.main.SoundPoolActivity" />
+        <activity android:name=".Activity.SettingActivity" />
+        <activity android:name=".Activity.SettingsActivity" />
+        <activity android:name=".Activity.BraodCastActivity" />
+        <activity android:name=".Activity.PropertyAnimationActivity" />
+        <activity android:name=".Activity.ViewpagerActivity" />
+        <activity android:name=".Recyclerview.RecycleViewTwoActivity" />
+        <activity android:name=".gridview.GridViewActivity" />
 
+        <receiver android:name=".BroadcastReceiver.RootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.category.APP_CALCULATOR" />
+                <action android:name="android.intent.category.APP_EMAIL" />
+            </intent-filter>
+        </receiver>
         <service android:name=".MyService" />
         <!-- Mqtt Service -->
         <service android:name="org.eclipse.paho.android.service.MqttService" />

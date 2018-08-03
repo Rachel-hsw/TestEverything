@@ -1,21 +1,33 @@
 package com.example.pc.testeverything.Activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.alibaba.fastjson.JSONObject;
 import com.example.pc.testeverything.Activity.main.Fruit;
 import com.example.pc.testeverything.Activity.main.FruitAdapter;
 import com.example.pc.testeverything.DialogActivity;
 import com.example.pc.testeverything.R;
+import com.example.pc.testeverything.model.KeyCode;
+import com.example.pc.testeverything.model.Keys;
 
+import java.security.Key;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +44,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView text;
     private int i = 0;
     private Button button;
-    private Fruit[] fruits = {new Fruit("弹出二维码", R.mipmap.fox), new Fruit("约束布局", R.mipmap.fox),
+    private Fruit[] fruits = {
+            new Fruit("弹出二维码", R.mipmap.fox), new Fruit("约束布局", R.mipmap.fox),
             new Fruit("下单", R.mipmap.fox),new Fruit("碎片", R.mipmap.fox),
-            new Fruit("Apple", R.mipmap.fox),new Fruit("Apple", R.mipmap.fox),
-            new Fruit("Apple", R.mipmap.fox),new Fruit("Apple", R.mipmap.fox)
+            new Fruit("计算器", R.mipmap.fox), new Fruit("添加声音", R.mipmap.fox),
+            new Fruit("设置", R.mipmap.fox), new Fruit("动态广播", R.mipmap.fox),
+            new Fruit("属性动画研究", R.mipmap.fox), new Fruit("ViewPager", R.mipmap.fox),
+            new Fruit("RecyclerView嵌套RecylerView", R.mipmap.fox), new Fruit("网格", R.mipmap.fox)
     };
 
     private List<Fruit> fruitList = new ArrayList<>();
@@ -83,8 +98,73 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("d:="+nf.format(d));//nf.format(d):1234567890.12
         double u=9;
         System.out.println("d:="+u);//nf.format(d):1234567890.12
+     /*showUpdateNumberOfKds();*/
+        Keys keys = new Keys();
+        KeyCode keyCode = new KeyCode();
+        keyCode.setCancelOrder("0");
+        keyCode.setInit("0");
+        keyCode.setPrepareMeals("0");
+        keyCode.setPrint("0");
+        keyCode.setRequestCabinet("0");
+        keys.setKeyCode(keyCode);
+        keys.setEnableFunctionKey(false);
+        String jsonString = JSONObject.toJSONString(keys);
 
+        System.out.println("hsw=" + jsonString);//nf.format(d):1234567890.12
     }
+
+    /* private void showUpdateNumberOfKds() {
+         Log.i("testhsw1",(String)SpUtils.get().get(NUMBER_OF_KDS));
+         numberOfKds.addTextChangedListener(new TextWatcher() {
+             @Override
+             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+             }
+
+             @Override
+             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+             }
+
+             @Override
+             public void afterTextChanged(Editable s) {
+                 SpUtils.get().put(NUMBER_OF_KDS, numberOfKds.getText().toString());
+                 getData();
+                 spinnerAdapter.notifyDataSetChanged();
+                 Log.i("testhsw2", numberOfKds.getText().toString());
+
+             }
+         });
+         //普通的AlertDialog对话框
+         findViewById(R.id.btn_number_of_kds).setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                 LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+                 View layout = inflater.inflate(R.layout.update_number_of_kds_layout, null);
+                 TextView btn_sure= (TextView) findViewById(R.id.btn_sure);
+                 final EditText message= (EditText) findViewById(R.id.message);
+                 final Dialog dialog = builder.create();
+                 dialog.show();
+                 dialog.getWindow().setContentView(layout);//自定义布局应该在这里添加，要在dialog.show()的后面
+                 btn_sure.setOnClickListener(new View.OnClickListener() {
+
+                     @Override
+                     public void onClick(View v) {
+                         dialog.dismiss();
+                         if ("".equals(message.getText().toString())){
+                             Toast.makeText(MainActivity.this, "请键入数字", Toast.LENGTH_SHORT).show();
+                         }else{
+                             SpUtils.get().put("NUMBER_OF_KDS", message.getText().toString());
+                             numberOfKds.setText("本门店KDS数量"+SpUtils.get().get("NUMBER_OF_KDS"));
+                         }
+
+                     }
+                 });
+
+             }
+         });
+     }*/
     private void initFruits() {
         fruitList.clear();
         for (int i = 0; i <fruits.length; i++) {

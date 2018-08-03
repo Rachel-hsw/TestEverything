@@ -21,8 +21,10 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.example.pc.testeverything.R;
 import com.example.pc.testeverything.model.OkhttpResponse;
 import com.example.pc.testeverything.utils.HttpUtil;
+import com.tiidian.log.LogManager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -146,6 +148,7 @@ public class OkHttpActivity extends AppCompatActivity {
                         SerializerFeature[] features;
                         features = new SerializerFeature[]{SerializerFeature.WriteDateUseDateFormat};
                         jsonString = JSON.toJSONString(request, features);
+
                         Log.e("asd", "需要发送的数据为" + jsonString);
                         body = RequestBody.create(MediaType.parse("application/json"), jsonString);
                         builder.post(body);

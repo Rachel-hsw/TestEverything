@@ -11,12 +11,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.pc.testeverything.Activity.BraodCastActivity;
 import com.example.pc.testeverything.Activity.MainFragmentActivity;
 import com.example.pc.testeverything.Activity.OkHttpActivity;
+import com.example.pc.testeverything.Activity.PropertyAnimationActivity;
 import com.example.pc.testeverything.Activity.QRcodeActivity;
+import com.example.pc.testeverything.Activity.SettingsActivity;
 import com.example.pc.testeverything.Activity.TestLayoutActivity;
+import com.example.pc.testeverything.Activity.ViewpagerActivity;
 import com.example.pc.testeverything.Activity.culActivity;
 import com.example.pc.testeverything.R;
+import com.example.pc.testeverything.Recyclerview.RecycleViewTwoActivity;
+import com.example.pc.testeverything.gridview.GridViewActivity;
 
 import java.util.List;
 
@@ -59,11 +65,13 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
                 Fruit fruit = mFruitList.get(position);
                 switch (position){
                     case 0:
+                        //二维码
                         Intent intent = new Intent(mContext,  QRcodeActivity.class);
                         mContext.startActivity(intent);
 
                         break;
                     case 1:
+                        //约束布局
                         Intent intent1 = new Intent(mContext,  TestLayoutActivity.class);
                         mContext.startActivity(intent1);
                         break;
@@ -73,16 +81,49 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
                         mContext.startActivity(intent2);
                         break;
                     case 3:
+                        //碎片
                         Intent intent3 = new Intent(mContext,  MainFragmentActivity.class);
                         mContext.startActivity(intent3);
                         break;
                     case 4:
+                        //计算器
                         Intent intent4 = new Intent(mContext,  culActivity.class);
                         mContext.startActivity(intent4);
                         break;
                     case 5:
+                        //添加声音
                         Intent intent5 = new Intent(mContext,  SoundPoolActivity.class);
                         mContext.startActivity(intent5);
+                        break;
+                    case 6:
+                        //设置
+                        Intent intent6 = new Intent(mContext, SettingsActivity.class);
+                        mContext.startActivity(intent6);
+                        break;
+                    case 7:
+                        //动态广播
+                        Intent intent7 = new Intent(mContext, BraodCastActivity.class);
+                        mContext.startActivity(intent7);
+                        break;
+                    case 8:
+                        //属性动画研究
+                        Intent intent8 = new Intent(mContext, PropertyAnimationActivity.class);
+                        mContext.startActivity(intent8);
+                        break;
+                    case 9:
+                        //ViewPager
+                        Intent intent9 = new Intent(mContext, ViewpagerActivity.class);
+                        mContext.startActivity(intent9);
+                        break;
+                    case 10:
+                        //RecyclerView嵌套RecylerView
+                        Intent intent10 = new Intent(mContext, RecycleViewTwoActivity.class);
+                        mContext.startActivity(intent10);
+                        break;
+                    case 11:
+                        //网格
+                        Intent intent11 = new Intent(mContext, GridViewActivity.class);
+                        mContext.startActivity(intent11);
                         break;
                 }
                /* Intent intent = new Intent(mContext, FruitActivity.class);

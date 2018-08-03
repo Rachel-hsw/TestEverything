@@ -1,0 +1,18 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="boolean_value"
+        android:summary="保存一个boolean值"
+        android:title="Checkbox" />
+
+    <EditTextPreference
+        android:defaultValue="defaultString"
+        android:key="string_value"
+        android:name="EditText"
+        android:summary="保存一个字符串"
+        android:title="Edit Text" />
+
+</PreferenceScreen>

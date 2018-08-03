@@ -1,4 +1,4 @@
-package com.example.pc.testeverything;
+package com.example.pc.testeverything.Activity;
 
 
         import android.animation.AnimatorSet;
@@ -17,6 +17,10 @@ package com.example.pc.testeverything;
         import android.widget.ImageView;
         import android.widget.TextView;
 
+        import com.example.pc.testeverything.MyApplication;
+        import com.example.pc.testeverything.MyTextView;
+        import com.example.pc.testeverything.R;
+
         import java.util.Calendar;
         import java.util.TimeZone;
 
@@ -24,7 +28,7 @@ package com.example.pc.testeverything;
 
         import static com.example.pc.testeverything.DateUtil.getUnixTimeByCalendar;
 
-public class PropertyAnimation extends ActionBarActivity {
+public class PropertyAnimationActivity extends ActionBarActivity {
 
     private TextView textview ;
     private Button scaleX ;

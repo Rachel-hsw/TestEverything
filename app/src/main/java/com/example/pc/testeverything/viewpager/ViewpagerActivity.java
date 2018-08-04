@@ -1,4 +1,4 @@
-package com.example.pc.testeverything.Activity;
+package com.example.pc.testeverything.viewpager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 
 import com.example.pc.testeverything.R;
-import com.example.pc.testeverything.adapter.MyPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

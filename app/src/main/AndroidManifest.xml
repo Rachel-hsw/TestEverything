@@ -41,7 +41,7 @@
         <activity android:name=".Activity.SettingsActivity" />
         <activity android:name=".Activity.BraodCastActivity" />
         <activity android:name=".Activity.PropertyAnimationActivity" />
-        <activity android:name=".Activity.ViewpagerActivity" />
+        <activity android:name=".viewpager.ViewpagerActivity" />
         <activity android:name=".Recyclerview.RecycleViewTwoActivity" />
         <activity android:name=".gridview.GridViewActivity" />
 

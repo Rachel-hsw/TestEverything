@@ -18,7 +18,7 @@ import com.example.pc.testeverything.Activity.PropertyAnimationActivity;
 import com.example.pc.testeverything.Activity.QRcodeActivity;
 import com.example.pc.testeverything.Activity.SettingsActivity;
 import com.example.pc.testeverything.Activity.TestLayoutActivity;
-import com.example.pc.testeverything.Activity.ViewpagerActivity;
+import com.example.pc.testeverything.viewpager.ViewpagerActivity;
 import com.example.pc.testeverything.Activity.culActivity;
 import com.example.pc.testeverything.R;
 import com.example.pc.testeverything.Recyclerview.RecycleViewTwoActivity;

@@ -48,10 +48,10 @@ class GridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(int position, View view, ViewGroup parent) {
         Holder holder;
         if (view == null) {
-            view = inflater.inflate(R.layout.item_listview, null);
+            view = inflater.inflate(R.layout.item_listview, parent, false);
             holder = new Holder();
             holder.detailNumber = (TextView) view.findViewById(R.id.detailNumber);
             holder.detailName = (TextView) view.findViewById(R.id.detailName);

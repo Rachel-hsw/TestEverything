@@ -4,10 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.pc.testeverything.Activity.MainActivity;
 import com.example.pc.testeverything.R;
 import com.example.pc.testeverything.Recyclerview.OrderDetail;
 
@@ -29,11 +32,16 @@ public class GridViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gridview_layout);
-
-        gridview = (GridView) findViewById(R.id.gridview);
+        findViewById(R.id.rll_view_cabinet_status).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(GridViewActivity.this, "用户点击了", Toast.LENGTH_LONG).show();
+            }
+        });
+    /*    gridview = (GridView) findViewById(R.id.gridview);
 
         myGridView = new GridAdapter(this, initOders());
-        gridview.setAdapter(myGridView);
+        gridview.setAdapter(myGridView);*/
 
 
     }

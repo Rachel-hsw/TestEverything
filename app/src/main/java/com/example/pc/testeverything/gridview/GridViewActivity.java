@@ -1,16 +1,11 @@
 package com.example.pc.testeverything.gridview;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.pc.testeverything.Activity.MainActivity;
 import com.example.pc.testeverything.R;
 import com.example.pc.testeverything.Recyclerview.OrderDetail;
 
@@ -43,13 +38,24 @@ public class GridViewActivity extends AppCompatActivity {
         myGridView = new GridAdapter(this, initOders());
         gridview.setAdapter(myGridView);*/
 
+      /*  View gridview = findViewById(R.id.gridview);
+
+        myGridView = new GridAdapter(this, initOders());
+        gridview.setAdapter(myGridView);*/
+
+        orderDetailList = initOders();
+        for (OrderDetail orderDetail : orderDetailList) {
+            if (orderDetail.getDetailNumber().equals("2")) {
+                orderDetailList.remove(orderDetail);
+            }
+        }
 
     }
 
     private List<OrderDetail> initOders() {
         List<OrderDetail> orderDetails = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            orderDetails.add(new OrderDetail("爱上豆浆", "x1"));
+            orderDetails.add(new OrderDetail("爱上豆浆", "2"));
             orderDetails.add(new OrderDetail("爱上豆浆", "x1"));
             orderDetails.add(new OrderDetail("爱上豆浆", "x1"));
             orderDetails.add(new OrderDetail("爱上豆浆", "x1"));

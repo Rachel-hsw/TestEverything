@@ -5,9 +5,15 @@
     android:layout_height="match_parent">
 
     <com.example.pc.testeverything.Recyclerview.MyRecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/rl_orders">
 
     </com.example.pc.testeverything.Recyclerview.MyRecyclerView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="宇宙无敌"
+        android:id="@+id/button" />
 </LinearLayout>

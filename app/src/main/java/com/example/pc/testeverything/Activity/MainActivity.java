@@ -1,24 +1,16 @@
 package com.example.pc.testeverything.Activity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.alibaba.fastjson.JSONObject;
 import com.example.pc.testeverything.Activity.main.Fruit;
 import com.example.pc.testeverything.Activity.main.FruitAdapter;
@@ -26,12 +18,9 @@ import com.example.pc.testeverything.DialogActivity;
 import com.example.pc.testeverything.R;
 import com.example.pc.testeverything.model.KeyCode;
 import com.example.pc.testeverything.model.Keys;
-
-import java.security.Key;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * 主要的activity
@@ -111,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         String jsonString = JSONObject.toJSONString(keys);
 
         System.out.println("hsw=" + jsonString);//nf.format(d):1234567890.12
+
+
     }
 
     /* private void showUpdateNumberOfKds() {

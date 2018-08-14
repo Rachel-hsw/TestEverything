@@ -27,9 +27,27 @@ class GridAdapter extends BaseAdapter {
         inflater = LayoutInflater.from(context);
     }
 
-    private class Holder {
+
+    private class Holder implements View.OnClickListener {
         TextView detailName;
         TextView detailNumber;
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.detailName:
+                    setStyle();
+                    break;
+
+            }
+        }
+
+        private void setStyle() {
+        }
+
+        public void setListener() {
+            detailName.setOnClickListener(this);
+        }
     }
 
     @Override
@@ -62,7 +80,7 @@ class GridAdapter extends BaseAdapter {
         OrderDetail orderDetail = orderDetailList.get(position);
         holder.detailName.setText(orderDetail.getDetailName());
         holder.detailNumber.setText(orderDetail.getDetailNumber());
-
+        holder.setListener();
         return view;
     }
 }

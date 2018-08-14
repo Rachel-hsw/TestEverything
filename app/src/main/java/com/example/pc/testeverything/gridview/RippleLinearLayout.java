@@ -122,8 +122,15 @@ public class RippleLinearLayout extends LinearLayout {
         mCurrentY = mInitY;
     }
 
+    /**
+     * 如果在方法结束时直接return true,事件就不会再向下传递，那么Activity中的点击监听事件setOnClickListener就不会再被触发
+     *
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         final int action = MotionEventCompat.getActionMasked(event);
         Log.i("hswtest", "-----------" + action);
         switch (action) {

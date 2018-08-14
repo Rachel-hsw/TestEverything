@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 
 import com.example.pc.testeverything.R;
 
@@ -25,7 +24,6 @@ public class culActivity extends AppCompatActivity implements View.OnClickListen
             btn_subtract, btn_multiply, btn_divide;
     EditText et_result;
     EditText et_cul;
-
     boolean clear_flag;
     BigDecimal leftVal = new BigDecimal("0");
     BigDecimal culVal = new BigDecimal("0");

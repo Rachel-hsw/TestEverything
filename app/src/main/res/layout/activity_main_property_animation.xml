@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.animation.MainActivity" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -89,6 +88,41 @@
         android:text="动画样例"
         android:textSize="30sp"
         android:textColor="#00EE00" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/berirut"
+        android:textSize="48sp"
+        android:text="     berirut  酱滋嫩" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="48sp"
+        android:id="@+id/sourcehansanscnheavy"
+        android:text="   SourceHanSansCN-Heavy  思源黑体 酱滋嫩" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notosanshansblack"
+        android:textSize="48sp"
+        android:text="    NotoSansHans-Black 思源黑体 酱滋嫩" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sourcehansanscnbold"
+        android:textSize="48sp"
+        android:text="    SourceHanSansCN-Bold  思源黑体 酱滋嫩" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sourcehansanscnnormal"
+        android:textSize="48sp"
+        android:text="    SourceHanSansCN-Normal  思源黑体 酱滋嫩" />
     <!--  使用默认的sans字体-->
     <TextView
         android:id="@+id/sans"
@@ -104,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:typeface="serif"></TextView>
+        android:typeface="serif" />
 
     <!--  使用默认的monospace字体-->
     <TextView

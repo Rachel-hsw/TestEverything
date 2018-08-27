@@ -76,8 +76,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.i("ddddddddddd", "dddddddd4");
+
         Order order = orderList.get(position);
+        Log.i("ddddddddddd", "dddddddd4" + order.getOrderNumber());
         holder.orderNumber.setText(order.getOrderNumber());
         OrderDetailAdapter adapter = new OrderDetailAdapter(context, order.getOrderDetailList());
         LinearLayoutManager linear = new LinearLayoutManager(context);

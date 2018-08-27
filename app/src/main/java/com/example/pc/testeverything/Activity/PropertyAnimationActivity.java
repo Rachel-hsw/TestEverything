@@ -5,7 +5,6 @@ package com.example.pc.testeverything.Activity;
         import android.animation.ObjectAnimator;
         import android.animation.ValueAnimator;
         import android.content.Context;
-        import android.content.res.AssetManager;
         import android.graphics.Typeface;
         import android.graphics.drawable.ClipDrawable;
         import android.os.Bundle;
@@ -80,6 +79,29 @@ public class PropertyAnimationActivity extends ActionBarActivity {
         //设置字体
         monospacec.setTypeface(MyApplication.getTypefaceCaiYun());
 
+
+        //实例化TextView
+        TextView berirut = (TextView) findViewById(R.id.berirut);
+        //设置字体
+        berirut.setTypeface(MyApplication.getBerirut());
+        //实例化TextView
+        TextView sourcehansanscnheavy = (TextView) findViewById(R.id.sourcehansanscnheavy);
+        //设置字体
+        sourcehansanscnheavy.setTypeface(MyApplication.getSourcehansanscnheavy());
+        //实例化TextView
+        TextView notosanshansblack = (TextView) findViewById(R.id.notosanshansblack);
+        //设置字体
+        notosanshansblack.setTypeface(MyApplication.getNotosanshans());
+        //实例化TextView
+        TextView sourcehansanscnbold = (TextView) findViewById(R.id.sourcehansanscnbold);
+        //设置字体
+        sourcehansanscnbold.setTypeface(MyApplication.getSourcehansanscnbold());
+        //实例化TextView
+        TextView sourcehansanscnnormal = (TextView) findViewById(R.id.sourcehansanscnnormal);
+        //设置字体
+//        sourcehansanscnnormal.setTypeface(MyApplication.getSourcehansanscnnormal());
+        Typeface simcaiyun = Typeface.createFromAsset(getAssets(), "simcaiyun.ttf");
+        sourcehansanscnnormal.setTypeface(simcaiyun);
 
         // 设置滚动的速度
         tv1.setScrollMode(MyTextView.SCROLL_SLOW);

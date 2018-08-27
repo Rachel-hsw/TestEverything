@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import com.example.pc.testeverything.Activity.main.SpeackUtils;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by PC on 2018/5/24.
@@ -22,6 +21,11 @@ public class MyApplication extends Application {
     private static Typeface simsun;
     private static Typeface simsiyuan;
     private static Typeface simcaiyun;
+    private static Typeface berirut;
+    private static Typeface notosanshans;
+    private static Typeface sourcehansanscnbold;
+    private static Typeface sourcehansanscnheavy;
+    private static Typeface sourcehansanscnnormal;
 
     @Override
     public void onCreate() {
@@ -29,18 +33,31 @@ public class MyApplication extends Application {
         context = getApplicationContext();
        //得到AssetManager
         AssetManager mgr = getAssets();
-        /* //根据路径得到Typeface-楷体
+        //根据路径得到Typeface-楷体
         simkai = Typeface.createFromAsset(mgr, "simkai.ttf");
         //根据路径得到Typeface-黑体
         simhei = Typeface.createFromAsset(mgr, "simhei.ttf");
         //根据路径得到Typeface-宋体
-        simsun = Typeface.createFromAsset(mgr, "simsun.ttc");*/
+        simsun = Typeface.createFromAsset(mgr, "simsun.ttc");
         //根据路径得到Typeface-思源黑体
         simsiyuan = Typeface.createFromAsset(mgr, "simsiyuan.ttf");
         //根据路径得到Typeface-华文彩云
         simcaiyun = Typeface.createFromAsset(mgr, "simcaiyun.ttf");
+        //根据路径得到Typeface-berirut
+        berirut = Typeface.createFromAsset(mgr, "Beirut.ttc");
+        //根据路径得到Typeface-思源黑体   NotoSansHans-Black
+        notosanshans = Typeface.createFromAsset(mgr, "NotoSansHans-Black.otf");
+        //根据路径得到Typeface-思源黑体粗体 SourceHanSansCN-Bold
+        sourcehansanscnbold = Typeface.createFromAsset(mgr, "SourceHanSansCN-Bold.otf");
+        //根据路径得到Typeface-SourceHanSansCN-Heavy
+        sourcehansanscnheavy = Typeface.createFromAsset(mgr, "SourceHanSansCN-Heavy.otf");
+        //根据路径得到Typeface-SourceHanSansCN-Normal
+        sourcehansanscnnormal = Typeface.createFromAsset(mgr, "SourceHanSansCN-Normal.otf");
+
+
+
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("simkai.ttf")
+                .setDefaultFontPath("simcaiyun.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
@@ -66,4 +83,43 @@ public class MyApplication extends Application {
         return simcaiyun;
     }
 
+    public static Typeface getBerirut() {
+        return berirut;
+    }
+
+    public static void setBerirut(Typeface berirut) {
+        MyApplication.berirut = berirut;
+    }
+
+    public static Typeface getNotosanshans() {
+        return notosanshans;
+    }
+
+    public static void setNotosanshans(Typeface notosanshans) {
+        MyApplication.notosanshans = notosanshans;
+    }
+
+    public static Typeface getSourcehansanscnbold() {
+        return sourcehansanscnbold;
+    }
+
+    public static void setSourcehansanscnbold(Typeface sourcehansanscnbold) {
+        MyApplication.sourcehansanscnbold = sourcehansanscnbold;
+    }
+
+    public static Typeface getSourcehansanscnheavy() {
+        return sourcehansanscnheavy;
+    }
+
+    public static void setSourcehansanscnheavy(Typeface sourcehansanscnheavy) {
+        MyApplication.sourcehansanscnheavy = sourcehansanscnheavy;
+    }
+
+    public static Typeface getSourcehansanscnnormal() {
+        return sourcehansanscnnormal;
+    }
+
+    public static void setSourcehansanscnnormal(Typeface sourcehansanscnnormal) {
+        MyApplication.sourcehansanscnnormal = sourcehansanscnnormal;
+    }
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.alibaba.fastjson.JSONObject;
 import com.example.pc.testeverything.Activity.main.Fruit;
 import com.example.pc.testeverything.Activity.main.FruitAdapter;
@@ -18,8 +19,12 @@ import com.example.pc.testeverything.DialogActivity;
 import com.example.pc.testeverything.R;
 import com.example.pc.testeverything.model.KeyCode;
 import com.example.pc.testeverything.model.Keys;
+
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -101,9 +106,63 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("hsw=" + jsonString);//nf.format(d):1234567890.12
 
+        String newTime = UTCStringtODefaultString("2018-08-18T06:02:26.000Z");
+        long newTime1 = getLongTime("2018-08-18 14:09:53.000");
+        Log.i("-------------", newTime + "   " + newTime1);
+        String oldTime = UTCStringtODefaultString("2018-08-18T05:58:04.000Z");
+        long oldTime1 = getLongTime("2018-08-18 11:54:27.000");
+        Log.i("-------------", oldTime + "   " + oldTime1);
+        if (oldTime1 > newTime1) {
+            Log.i("-------------", "TRUE");
+        } else {
+            //1534572146000
+            //1534571884000
+            Log.i("-------------", "False");
+        }
 
     }
 
+    //    public long getLongTime(String UTCString) {
+//
+////            UTCString = UTCString.replace("Z", " UTC");
+////            SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z");
+////            SimpleDateFormat defaultFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+////            Date date = utcFormat.parse(UTCString);
+//            Date date=new Date("2018-08-18 14:09:53.000");
+//            long oldTime=date.getTime();
+//            Log.i("-------------",date.toString());
+//            return oldTime;
+//
+//    }
+    public long getLongTime(String UTCString) {
+        String date_str = UTCString;
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").parse(date_str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+       /* String str = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);
+        System.out.println(str);*/
+        long oldTime = date.getTime();
+        Log.i("-------------", date.toString());
+        return oldTime;
+    }
+
+    public String UTCStringtODefaultString(String UTCString) {
+        try {
+            UTCString = UTCString.replace("Z", " UTC");
+            SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS Z");
+            SimpleDateFormat defaultFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = utcFormat.parse(UTCString);
+            long oldTime = date.getTime();
+
+            return defaultFormat.format(date);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+            return null;
+        }
+    }
     /* private void showUpdateNumberOfKds() {
          Log.i("testhsw1",(String)SpUtils.get().get(NUMBER_OF_KDS));
          numberOfKds.addTextChangedListener(new TextWatcher() {

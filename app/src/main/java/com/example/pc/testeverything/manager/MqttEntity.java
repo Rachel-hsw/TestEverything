@@ -1,14 +1,13 @@
 package com.example.pc.testeverything.manager;
 
 import android.content.Context;
-
 import java.util.List;
 
 /**
  * Created by PC on 2018/7/19.
  */
 
-public class MqttEnity {
+public class MqttEntity {
     //host为主机名 Mqtt服务器地址(tcp://xxxx:1863)
     private String serverURI;
     //连接MQTT的客户端ID，一般以唯一标识符表示

@@ -1,12 +1,11 @@
 package com.example.pc.testeverything.manager;
 
 import android.content.Context;
-
+import android.text.TextUtils;
 import com.tiidian.log.LogManager;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,16 +14,10 @@ import java.util.List;
  */
 
 public class MqttUsageMode implements MqttConnectCallback {
-    List<String> clientIdList;
-    List<MqttAndroidClient> MqttAndroidClientList;
-    boolean isIdExit;
     public static MqttUsageMode instance;
-
     private MqttUsageMode() {
-        clientIdList = new ArrayList<>();
-        MqttAndroidClientList = new ArrayList<>();
-    }
 
+    }
     public static MqttUsageMode get() {
         if (instance == null) {
             instance = new MqttUsageMode();
@@ -39,26 +32,18 @@ public class MqttUsageMode implements MqttConnectCallback {
      * @param clientId
      * @param context
      */
-    private void startNewMqttManager(String serverURI, String clientId, Context context) {
-        isIdExit = false;
-        for (String id : clientIdList) {
-            if (id.equals(clientId)) {
-                isIdExit = true;
-            }
-        }
-        if (!isIdExit) {
-            clientIdList.add(clientId);
-            MqttEnity mqttEnity = new MqttEnity();
-            mqttEnity.setContext(context);
-            mqttEnity.setClientId(clientId);
-            mqttEnity.setServerURI(serverURI);
-            mqttEnity.setCleanSession(DeviceManager.get().getCleanSession());
-            mqttEnity.setUserName(DeviceManager.get().getUserName());
-            mqttEnity.setPassword(DeviceManager.get().getPassword());
-            mqttEnity.setConnectCallback(instance);
+    private void addNewMqttManager(String serverURI, String clientId, Context context, List<String> pathList) {
+        MqttEntity mqttEntity = new MqttEntity();
+        mqttEntity.setContext(context);
+        mqttEntity.setClientId(clientId);
+        mqttEntity.setServerURI(serverURI);
+    /*        mqttEntity.setCleanSession(DeviceManager.get().getCleanSession());
+            mqttEntity.setUserName(DeviceManager.get().getUserName());
+            mqttEntity.setPassword(DeviceManager.get().getPassword());*/
+        mqttEntity.setConnectCallback(instance);
+        mqttEntity.setPathList(pathList);
             LogManager.get().getLogger(MqttManager.class).info("Mqtt开始连接");
-            MqttManager.get().initMqtt(mqttEnity);
-        }
+        MqttManager.get().addNewMqttClient(mqttEntity);
 
     }
 
@@ -75,32 +60,59 @@ public class MqttUsageMode implements MqttConnectCallback {
     }
 
     @Override
-    public void onCmdMessageArrivedCallback(String message) {
+    public void onMessageArrivedCallback(String topic, MqttMessage message) {
+        try {
+            if (topic.endsWith("/")) {
+                topic = topic.substring(0, topic.length() - 1);
+            }
+            String data = new String(message.getPayload());
+            if (TextUtils.equals(topic, getCmdPath())) {
 
+            } else if (TextUtils.equals(topic, getBasicConfigPath())) {
+
+            } else if (TextUtils.equals(topic, getDataPath())) {
+
+            } else if (TextUtils.equals(topic, getMenuBasicPath())) {
+
+            } else if (TextUtils.equals(topic, getMenusizePath())) {
+
+            } else if (TextUtils.equals(topic, getMenusoldPath())) {
+
+            }
+            LogManager.get().getLogger(MqttManager.class).info("接收mqtt消息：" + message.getPayload() + "。监听地址为：" + topic);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void onBasicConfigMessageArrivedCallback(String message) {
+    public void onClientExist(MqttEntity mqttEntity) {
+        LogManager.get().getLogger(MqttManager.class).info("服务器地址为：" + mqttEntity.getServerURI() + ",ClientID为" + mqttEntity.getClientId() + "的Mqtt已经存在，无需重复创建");
 
     }
 
-    @Override
-    public void onDataMessageArrivedCallback(String message) {
-
+    private String getMenusizePath() {
+        return "";
     }
 
-    @Override
-    public void onMenuBasicMessageArrivedCallback(String message) {
-
+    private String getMenuBasicPath() {
+        return "";
     }
 
-    @Override
-    public void onMenusizeMessageArrivedCallback(String message) {
-
+    private String getDataPath() {
+        return "";
     }
 
-    @Override
-    public void onMenusoldMessageArrivedCallback(String message) {
-
+    private String getMenusoldPath() {
+        return "";
     }
+
+    private String getBasicConfigPath() {
+        return "";
+    }
+
+    private String getCmdPath() {
+        return "";
+    }
+
 }

@@ -1,4 +1,5 @@
 package com.example.pc.testeverything.manager;
+
 import android.text.TextUtils;
 
 import com.tiidian.log.LogManager;
@@ -15,8 +16,11 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -36,9 +40,30 @@ public class MqttManager {
     private String subscribeThreadUuid;
     private AtomicBoolean isSubscribe = new AtomicBoolean(false);
     private Queue<Boolean> connectQueue = new LinkedList<>();
-
-
+    List<MqttAndroidClient> clientList;
+    public ConcurrentLinkedQueue<Message> messageQueue;
+    boolean isIdExist;
     private MqttManager() {
+        clientList = new ArrayList<>();
+        messageQueue = new ConcurrentLinkedQueue<>();
+        ThreadManger.get().add(new ThreadListener() {
+            @Override
+            public void doAction() throws Exception {
+                while (true) {
+                    try {
+                        if (messageQueue.isEmpty()) {
+                            TimeUnit.MILLISECONDS.sleep(1000);
+                            continue;
+                        }
+                        Message message = messageQueue.poll();
+                        forwardServerMessage(message.getMqttEntity(), message.getTopic(), message.getMessage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
     }
 
     public static MqttManager get() {
@@ -48,12 +73,17 @@ public class MqttManager {
         return instance;
     }
 
-    private void mqttConnectFail(MqttEnity mqttEnity) {
-        sendMqttDisconnect(mqttEnity);
-        ThreadManger.get().add(new ThreadListener(mqttEnity) {
+    private int getMessageSize() {
+        return messageQueue.size();
+    }
+
+
+    private void mqttConnectFail(MqttEntity mqttEntity) {
+        sendMqttDisconnect(mqttEntity);
+        ThreadManger.get().add(new ThreadListener(mqttEntity) {
             @Override
             public void doAction() throws Exception {
-                MqttEnity mqttEnity = (MqttEnity) getObjectData()[0];
+                MqttEntity mqttEnity = (MqttEntity) getObjectData()[0];
                 if (reconnectTime <= 5) {
                     TimeUnit.SECONDS.sleep(MQTT_CONNECT_FIVE);
                 } else if (reconnectTime > 5 && reconnectTime < 1000) {
@@ -75,8 +105,8 @@ public class MqttManager {
         });
     }
 
-    private void mqttSubscribeFail(MqttEnity mqttEnity) {
-        sendMqttDisconnect(mqttEnity);
+    private void mqttSubscribeFail(MqttEntity mqttEntity) {
+        sendMqttDisconnect(mqttEntity);
         if (isSubscribe.get()) {
             return;
         } else {
@@ -84,10 +114,10 @@ public class MqttManager {
                 ThreadManger.get().cancel(subscribeThreadUuid);
             }
         }
-        subscribeThreadUuid = ThreadManger.get().add(new ThreadListener(mqttEnity) {
+        subscribeThreadUuid = ThreadManger.get().add(new ThreadListener(mqttEntity) {
             @Override
             public void doAction() throws Exception {
-                MqttEnity mqttEnity = (MqttEnity) getObjectData()[0];
+                MqttEntity mqttEnity = (MqttEntity) getObjectData()[0];
                 isSubscribe.getAndSet(true);
                 if (resubscribeTime <= 5) {
                     TimeUnit.SECONDS.sleep(MQTT_SUBSCRIBE_FIVE);
@@ -127,18 +157,38 @@ public class MqttManager {
         });
     }
 
+    //如果已经创建的clientList列表里不存在，则去创建
+    public void addNewMqttClient(MqttEntity mqttEntity) {
+        isIdExist = false;
+        if (mqttEntity.getClientId() != null) {
+            for (MqttAndroidClient client : clientList) {
+                if (client.getClientId().equals(mqttEntity.getClientId()) && client.getServerURI().equals(mqttEntity.getServerURI())) {
+                    isIdExist = true;
+                }
+            }
+        }
+        if (!isIdExist) {
+            MqttAndroidClient mqttAndroidClient = initMqtt(mqttEntity);
+            clientList.add(mqttAndroidClient);
+        } else {
+            if (mqttEntity.getConnectCallback() != null) {
+                mqttEntity.getConnectCallback().onClientExist(mqttEntity);
+            }
+        }
+    }
+
     /**
      * 初始化Mqtt，并连接
      */
-    public synchronized MqttAndroidClient initMqtt(final MqttEnity mqttEnity) {
+    public synchronized MqttAndroidClient initMqtt(final MqttEntity mqttEntity) {
         try {
             LogManager.get().getLogger(MqttManager.class).info("Mqtt开始创建Client连接对象");
             LogManager.get().getLogger(MqttManager.class).info(mqttAndroidClient == null ? "Mqtt的Client连接对象为空" : "Mqtt的Client连接对象不为空，连接ClientId为" +
                     mqttAndroidClient.getClientId() + "，ServerURI为" + mqttAndroidClient.getServerURI());
-            LogManager.get().getLogger(MqttManager.class).info("最新Mqtt的ClientId为" + mqttEnity.getClientId() + "，ServerURI为" + mqttEnity.getServerURI());
+            LogManager.get().getLogger(MqttManager.class).info("最新Mqtt的ClientId为" + mqttEntity.getClientId() + "，ServerURI为" + mqttEntity.getServerURI());
             if (mqttAndroidClient == null ||
-                    !TextUtils.equals(mqttAndroidClient.getClientId(), mqttEnity.getClientId()) ||
-                    !TextUtils.equals(mqttAndroidClient.getServerURI(), mqttEnity.getServerURI())) {
+                    !TextUtils.equals(mqttAndroidClient.getClientId(), mqttEntity.getClientId()) ||
+                    !TextUtils.equals(mqttAndroidClient.getServerURI(), mqttEntity.getServerURI())) {
                 if (mqttAndroidClient != null) {
                     LogManager.get().getLogger(MqttManager.class).info("Mqtt的Client连接对象不为空，并还连接着，关闭之后再连接");
                     if (mqttAndroidClient.isConnected()) {
@@ -146,8 +196,8 @@ public class MqttManager {
                         mqttAndroidClient.disconnect();
                     }
                 } else {
-                    mqttAndroidClient = new MqttAndroidClient(mqttEnity.getContext(),
-                            mqttEnity.getServerURI(),mqttEnity.getClientId());
+                    mqttAndroidClient = new MqttAndroidClient(mqttEntity.getContext(),
+                            mqttEntity.getServerURI(), mqttEntity.getClientId());
                 }
             } else {
                 if (mqttAndroidClient.isConnected()) {
@@ -157,12 +207,12 @@ public class MqttManager {
             }
             LogManager.get().getLogger(MqttManager.class).info("Mqtt开始创建Option配置对象");
             LogManager.get().getLogger(MqttManager.class).info(mqttOptions == null ? "Mqtt的Option配置对象为空" : "Mqtt的Option配置对象不为空");
-            LogManager.get().getLogger(MqttManager.class).info("Mqtt的Option配置对象中连接UserName为" + mqttEnity.getUserName() + "，Password为" + mqttEnity.getPassword());
+            LogManager.get().getLogger(MqttManager.class).info("Mqtt的Option配置对象中连接UserName为" + mqttEntity.getUserName() + "，Password为" + mqttEntity.getPassword());
 
-            if (mqttOptions == null || !TextUtils.equals(mqttOptions.getUserName(), mqttEnity.getUserName()) ||
-                    !TextUtils.equals(String.valueOf(mqttOptions.getPassword()), mqttEnity.getPassword())) {
+            if (mqttOptions == null || !TextUtils.equals(mqttOptions.getUserName(), mqttEntity.getUserName()) ||
+                    !TextUtils.equals(String.valueOf(mqttOptions.getPassword()), mqttEntity.getPassword())) {
 
-                mqttOptions = getMqttConnectOptions(mqttEnity.isCleanSession(), mqttEnity.getUserName(), mqttEnity.getPassword().toCharArray());
+                mqttOptions = getMqttConnectOptions(mqttEntity.isCleanSession(), mqttEntity.getUserName(), mqttEntity.getPassword().toCharArray());
             }
             LogManager.get().getLogger(MqttManager.class).info("Mqtt开始设置CallBack对象");
             mqttAndroidClient.setCallback(new MqttCallbackExtended() {
@@ -170,23 +220,28 @@ public class MqttManager {
                 public void connectComplete(boolean reconnect, String serverURI) {
                     if (reconnect) {
                         LogManager.get().getLogger(MqttManager.class).info("--Reconnected to : " + serverURI);
-                        sendMqttConnect(mqttEnity);
+                        sendMqttConnect(mqttEntity);
                     } else {
                         LogManager.get().getLogger(MqttManager.class).info("--Connected to : " + serverURI);
-                        sendMqttConnect(mqttEnity);
+                        sendMqttConnect(mqttEntity);
                     }
                 }
 
                 @Override
                 public void connectionLost(Throwable cause) {
                     LogManager.get().getLogger(MqttManager.class).warn("--The Connection was lost.");
-                    sendMqttDisconnect(mqttEnity);
+                    sendMqttDisconnect(mqttEntity);
                 }
 
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     //订阅的消息都会发送到这里
-                    forwardServerMessage(mqttEnity,topic, message);
+                    Message messageArrived = new Message();
+                    messageArrived.setTopic(topic);
+                    messageArrived.setMqttEntity(mqttEntity);
+                    messageArrived.setMessage(message);
+                    messageQueue.offer(messageArrived);
+
                 }
 
                 @Override
@@ -195,16 +250,16 @@ public class MqttManager {
                 }
             });
             LogManager.get().getLogger(MqttManager.class).info("Mqtt开始连接");
-            mqttConnect(mqttEnity);
+            mqttConnect(mqttEntity);
 
         } catch (Exception e) {
             LogManager.get().getLogger(MqttManager.class).error("Mqtt创建和连接失败（Crash），失败原因：", e);
-            mqttConnectFail(mqttEnity);
+            mqttConnectFail(mqttEntity);
         }
         return mqttAndroidClient;
     }
 
-    private void mqttConnect(final MqttEnity mqttEnity) {
+    private void mqttConnect(final MqttEntity mqttEntity) {
 
         try {
 
@@ -218,21 +273,21 @@ public class MqttManager {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    subscribeMqtt(mqttEnity);
+                    subscribeMqtt(mqttEntity);
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     LogManager.get().getLogger(MqttManager.class).error("Failed to connect to Mqtt: " +
                             mqttAndroidClient.getServerURI() + "。错误原因为:", exception);
-                    mqttConnectFail(mqttEnity);
+                    mqttConnectFail(mqttEntity);
                 }
             });
 
         } catch (MqttException e) {
             LogManager.get().getLogger(this.getClass()).error("连接异常", e);
 
-            mqttConnectFail(mqttEnity);
+            mqttConnectFail(mqttEntity);
         }
     }
 
@@ -250,23 +305,23 @@ public class MqttManager {
     /**
      * 初始化所有mqtt的监听接口
      */
-    private void subscribeMqtt(final MqttEnity mqttEnity) {
+    private void subscribeMqtt(final MqttEntity mqttEntity) {
 
         try {
             if (mqttAndroidClient == null) {
                 LogManager.get().getLogger(this.getClass()).error("mqtt连接对象为空");
-                mqttConnectFail(mqttEnity);
+                mqttConnectFail(mqttEntity);
                 return;
             }
 
             if (!mqttAndroidClient.isConnected()) {
                 LogManager.get().getLogger(this.getClass()).error("mqtt未连接");
-                mqttConnectFail(mqttEnity);
+                mqttConnectFail(mqttEntity);
                 return;
             }
 
-            if (mqttEnity.getPathList()!= null) {
-                for (final String path : mqttEnity.getPathList()) {
+            if (mqttEntity.getPathList() != null) {
+                for (final String path : mqttEntity.getPathList()) {
                     mqttAndroidClient.subscribe(path, 2, null, new IMqttActionListener() {
                         @Override
                         public void onSuccess(IMqttToken asyncActionToken) {
@@ -275,7 +330,7 @@ public class MqttManager {
                         @Override
                         public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                             LogManager.get().getLogger(MqttManager.class).info("getOrderPath---" + path + "Failed to subscribe!");
-                            mqttSubscribeFail(mqttEnity);
+                            mqttSubscribeFail(mqttEntity);
                         }
                     });
 
@@ -290,9 +345,9 @@ public class MqttManager {
     /**
      * 发送mqtt断开的消息
      */
-    private void sendMqttDisconnect(MqttEnity mqttEnity) {
+    private void sendMqttDisconnect(MqttEntity mqttEntity) {
         connectQueue.offer(false);
-        mqttEnity.getConnectCallback().connectCallback(false,"mqtt断开");
+        mqttEntity.getConnectCallback().connectCallback(false, "mqtt断开");
 
 
     }
@@ -300,7 +355,7 @@ public class MqttManager {
     /**
      * 发送mqtt已连接的消息
      */
-    private synchronized void sendMqttConnect(final MqttEnity mqttEnity) {
+    private synchronized void sendMqttConnect(final MqttEntity mqttEnity) {
         //第一次连接
         ThreadManger.get().add(new ThreadListener() {
             @Override
@@ -320,7 +375,7 @@ public class MqttManager {
     }
 
     /**
-     * 关闭Mqtt连接
+     * 关闭当前Mqtt连接
      */
     public void close(MqttAndroidClient mqttAndroidClient) {
         if (mqttAndroidClient != null) {
@@ -331,92 +386,24 @@ public class MqttManager {
 
     }
 
-    private void forwardServerMessage(MqttEnity mqttEnity, String topic, MqttMessage message) {
+    /**
+     * 关闭所有Mqtt连接
+     */
+    public void close() {
+        for (MqttAndroidClient mqttAndroidClient : clientList) {
+            MqttManager.get().close(mqttAndroidClient);
+        }
+
+    }
+
+    private void forwardServerMessage(MqttEntity mqttEntity, String topic, MqttMessage message) {
         try {
-            if (topic.endsWith("/")) {
-                topic = topic.substring(0, topic.length() - 1);
-            }
-
-            if ( mqttEnity.getConnectCallback() != null) {
-                try {
-                    String data = new String(message.getPayload());
-
-                    if (TextUtils.equals(topic, getCmdPath())) {
-                        mqttEnity.getConnectCallback().onCmdMessageArrivedCallback(data);
-                      /*  try {
-                            JSONObject jsonObject = JSON.parseObject(data);
-                            String type = jsonObject.getString("type");
-                            if (!TextUtils.isEmpty(type)) {
-                                switch (type.toLowerCase()) {
-                                    case "cmd":
-                                        mqttEnity.getConnectCallback().onCmdMessageArrivedCallback(data);
-                                        break;
-                                    case "basicconfig":
-                                        mqttEnity.getConnectCallback().onBasicConfigMessageArrivedCallback(data);
-                                        break;
-                                    case "data":
-                                        mqttEnity.getConnectCallback().onDataMessageArrivedCallback(data);
-                                        break;
-                                    case "menubasic":
-                                        mqttEnity.getConnectCallback().onMenuBasicMessageArrivedCallback(data);
-                                        break;
-                                    case "menusize":
-                                        mqttEnity.getConnectCallback().onMenusizeMessageArrivedCallback(data);
-                                        break;
-                                    case "menusold":
-                                        mqttEnity.getConnectCallback().onMenusoldMessageArrivedCallback(data);
-                                        break;
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }*/
-                    } else if (TextUtils.equals(topic, getBasicConfigPath())) {
-                        mqttEnity.getConnectCallback().onBasicConfigMessageArrivedCallback(data);
-                    } else if (TextUtils.equals(topic, getDataPath())) {
-                        mqttEnity.getConnectCallback().onDataMessageArrivedCallback(data);
-                    } else if (TextUtils.equals(topic, getMenuBasicPath())) {
-                        mqttEnity.getConnectCallback().onMenuBasicMessageArrivedCallback(data);
-                    } else if (TextUtils.equals(topic, getMenusizePath())) {
-                        mqttEnity.getConnectCallback().onMenusizeMessageArrivedCallback(data);
-
-                    } else if (TextUtils.equals(topic, getMenusoldPath())) {
-                        mqttEnity.getConnectCallback().onMenusoldMessageArrivedCallback(data);
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            if (mqttEntity.getConnectCallback() != null) {
+                mqttEntity.getConnectCallback().onMessageArrivedCallback(topic, message);
             }
             LogManager.get().getLogger(MqttManager.class).info("接收mqtt消息：" + message.getPayload() + "。监听地址为：" + topic);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    private CharSequence getMenusizePath() {
-        return "";
-    }
-
-    private CharSequence getMenuBasicPath() {
-        return "";
-    }
-
-    private CharSequence getDataPath() {
-        return "";
-    }
-
-    private CharSequence getMenusoldPath() {
-        return "";
-    }
-
-    private CharSequence getBasicConfigPath() {
-        return "";
-    }
-
-    private String getCmdPath() {
-        return "";
-    }
-
-
 }

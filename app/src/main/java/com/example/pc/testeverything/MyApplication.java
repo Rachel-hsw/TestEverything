@@ -6,6 +6,8 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 
 import com.example.pc.testeverything.Activity.main.SpeackUtils;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
@@ -26,11 +28,25 @@ public class MyApplication extends Application {
     private static Typeface sourcehansanscnbold;
     private static Typeface sourcehansanscnheavy;
     private static Typeface sourcehansanscnnormal;
+    //LeakCanary使用详解
+    private RefWatcher refWatcher;
 
+    private RefWatcher setupLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return RefWatcher.DISABLED;
+        }
+        return LeakCanary.install(this);
+    }
+
+    public static RefWatcher getRefWatcher() {
+        MyApplication leakApplication = (MyApplication) context.getApplicationContext();
+        return leakApplication.refWatcher;
+    }
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        refWatcher = setupLeakCanary();
        //得到AssetManager
         AssetManager mgr = getAssets();
         //根据路径得到Typeface-楷体

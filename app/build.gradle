@@ -43,4 +43,6 @@ dependencies {
     compile 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.0'
     compile project(path: ':threadmanager')
     compile project(path: ':log')
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }

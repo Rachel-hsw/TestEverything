@@ -119,9 +119,21 @@ public class MainActivity extends AppCompatActivity {
             //1534571884000
             Log.i("-------------", "False");
         }
+//        LeakThread leakThread = new LeakThread();
+//        leakThread.start();
 
     }
 
+    //    class LeakThread extends Thread {
+//        @Override
+//        public void run() {
+//            try {
+//                Thread.sleep(6 * 60 * 1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
     //    public long getLongTime(String UTCString) {
 //
 ////            UTCString = UTCString.replace("Z", " UTC");

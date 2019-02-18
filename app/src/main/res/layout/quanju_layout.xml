@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/popup_window"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="哈哈哈哈哈"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp" />
+
+            <View
+                android:id="@+id/title_divider"
+                android:layout_width="match_parent"
+                android:layout_margin="30dp"
+                android:layout_height="8dp"
+                android:layout_below="@id/title"
+                android:background="#40000000" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_divider"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="你说啥"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <Button
+                android:id="@+id/negativeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#6000ff00"
+                android:focusable="true"
+                android:padding="10dp"
+                android:text="开心"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/positiveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_weight="1"
+                android:background="#400000ff"
+                android:focusable="true"
+                android:padding="10dp"
+                android:text="五色花"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

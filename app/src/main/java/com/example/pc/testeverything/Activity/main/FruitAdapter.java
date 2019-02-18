@@ -14,8 +14,10 @@ import com.bumptech.glide.Glide;
 import com.example.pc.testeverything.Activity.BraodCastActivity;
 import com.example.pc.testeverything.Activity.MainFragmentActivity;
 import com.example.pc.testeverything.Activity.OkHttpActivity;
+import com.example.pc.testeverything.Activity.PopWindowActivity;
 import com.example.pc.testeverything.Activity.PropertyAnimationActivity;
 import com.example.pc.testeverything.Activity.QRcodeActivity;
+import com.example.pc.testeverything.Activity.QuanJuDialogActivity;
 import com.example.pc.testeverything.Activity.SettingsActivity;
 import com.example.pc.testeverything.Activity.TestLayoutActivity;
 import com.example.pc.testeverything.viewpager.ViewpagerActivity;
@@ -124,6 +126,16 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
                         //网格
                         Intent intent11 = new Intent(mContext, GridViewActivity.class);
                         mContext.startActivity(intent11);
+                        break;
+                    case 12:
+                        //13popwindow
+                        Intent intent12 = new Intent(mContext, PopWindowActivity.class);
+                        mContext.startActivity(intent12);
+                        break;
+                    case 13:
+                        //13popwindow
+                        Intent intent13 = new Intent(mContext, QuanJuDialogActivity.class);
+                        mContext.startActivity(intent13);
                         break;
                 }
                /* Intent intent = new Intent(mContext, FruitActivity.class);

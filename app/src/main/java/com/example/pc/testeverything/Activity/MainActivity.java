@@ -39,12 +39,14 @@ public class MainActivity extends AppCompatActivity {
     private int i = 0;
     private Button button;
     private Fruit[] fruits = {
-            new Fruit("弹出二维码", R.mipmap.fox), new Fruit("约束布局", R.mipmap.fox),
-            new Fruit("下单", R.mipmap.fox),new Fruit("碎片", R.mipmap.fox),
-            new Fruit("计算器", R.mipmap.fox), new Fruit("添加声音", R.mipmap.fox),
-            new Fruit("设置", R.mipmap.fox), new Fruit("动态广播", R.mipmap.fox),
-            new Fruit("属性动画研究", R.mipmap.fox), new Fruit("ViewPager", R.mipmap.fox),
-            new Fruit("RecyclerView嵌套RecylerView", R.mipmap.fox), new Fruit("网格", R.mipmap.fox)
+            new Fruit("1弹出二维码", R.mipmap.fox), new Fruit("2约束布局", R.mipmap.fox),
+            new Fruit("3下单", R.mipmap.fox), new Fruit("4碎片", R.mipmap.fox),
+            new Fruit("5计算器", R.mipmap.fox), new Fruit("6添加声音", R.mipmap.fox),
+            new Fruit("7设置", R.mipmap.fox), new Fruit("8动态广播", R.mipmap.fox),
+            new Fruit("9属性动画研究", R.mipmap.fox), new Fruit("10ViewPager", R.mipmap.fox),
+            new Fruit("11RecyclerView嵌套RecylerView", R.mipmap.fox), new Fruit("12网格", R.mipmap.fox),
+            new Fruit("13popwindow", R.mipmap.fox), new Fruit("14全局对话框", R.mipmap.fox),
+            new Fruit("15测试", R.mipmap.fox)
     };
 
     private List<Fruit> fruitList = new ArrayList<>();
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initView();
         //开启子线程，验证子线程是否可以更新已经处于Pause状态的activity
       /*  updateTextAtThread();*/
@@ -119,21 +122,24 @@ public class MainActivity extends AppCompatActivity {
             //1534571884000
             Log.i("-------------", "False");
         }
-//        LeakThread leakThread = new LeakThread();
-//        leakThread.start();
+//        Fragment测试内存泄漏
+        LeakThread leakThread = new LeakThread();
+        leakThread.start();
+        Log.i("hsw-------------", "+++++++++++++++++++");
 
     }
 
-    //    class LeakThread extends Thread {
-//        @Override
-//        public void run() {
-//            try {
-//                Thread.sleep(6 * 60 * 1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    //Fragment测试内存泄漏
+    class LeakThread extends Thread {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(6 * 60 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     //    public long getLongTime(String UTCString) {
 //
 ////            UTCString = UTCString.replace("Z", " UTC");

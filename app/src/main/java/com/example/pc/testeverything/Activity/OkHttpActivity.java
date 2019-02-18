@@ -147,6 +147,7 @@ public class OkHttpActivity extends AppCompatActivity {
                         request.put("ctime", 1531574708);
                         request.put("ptime", 1531574708);
                         request.put("stype", 1);
+                        //四位取餐号
                         request.put("seq", orderString);
                         request.put("notify_url", "http://192.168.2.225/api/v1/notify");
                         request.put("qos", 1);

@@ -5,6 +5,12 @@
     <version value="1"></version>
 
     <list>
-        <mapping class="com.example.pc.testeverything.SqliteManager.News"></mapping>
+        <mapping class="com.example.pc.testeverything.SqliteManager.litepalmanager.News"></mapping>
+        <mapping
+            class="com.example.pc.testeverything.SqliteManager.litepalmanager.Comment"></mapping>
+        <mapping
+            class="com.example.pc.testeverything.SqliteManager.litepalmanager.Introduction"></mapping>
+        <mapping
+            class="com.example.pc.testeverything.SqliteManager.litepalmanager.IntroductionAuthor"></mapping>
     </list>
 </litepal>

@@ -45,5 +45,6 @@ dependencies {
     compile project(path: ':log')
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    compile files('libs/litepal-2.0.0.jar')
+    compile 'org.litepal.android:java:3.0.0'
+//    compile files('libs/litepal-2.0.0.jar')
 }

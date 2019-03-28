@@ -20,6 +20,11 @@ import com.example.pc.testeverything.Activity.main.FruitAdapter;
 import com.example.pc.testeverything.DialogActivity;
 import com.example.pc.testeverything.R;
 import com.example.pc.testeverything.SqliteManager.MySQLiteHelper;
+import com.example.pc.testeverything.SqliteManager.litepalmanager.Comment;
+import com.example.pc.testeverything.SqliteManager.litepalmanager.DBManager;
+import com.example.pc.testeverything.SqliteManager.litepalmanager.Introduction;
+import com.example.pc.testeverything.SqliteManager.litepalmanager.IntroductionAuthor;
+import com.example.pc.testeverything.SqliteManager.litepalmanager.News;
 import com.example.pc.testeverything.model.KeyCode;
 import com.example.pc.testeverything.model.Keys;
 
@@ -59,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //创建数据库
-        SQLiteOpenHelper dbHelper = new MySQLiteHelper(this, "my.db", null, 1);
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
         initView();
         //开启子线程，验证子线程是否可以更新已经处于Pause状态的activity
       /*  updateTextAtThread();*/

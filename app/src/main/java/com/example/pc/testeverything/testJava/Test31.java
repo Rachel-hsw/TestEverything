@@ -6,9 +6,19 @@ package com.example.pc.testeverything.testJava;
 class lm {
     int a;
     int b;
+
+    public lm() {
+        super();
+    }
+
+    public lm(int a, int b) {
+        super();
+        this.a = a;
+        this.b = b;
+    }
 }
 
-public class Test31 {
+class Test31 {
     static void swap(int a, int b) {
         int c = a + 1;
         a = b + 1;

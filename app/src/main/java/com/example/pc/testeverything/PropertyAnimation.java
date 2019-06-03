@@ -1,30 +1,28 @@
 package com.example.pc.testeverything;
 
 
-        import android.animation.AnimatorSet;
-        import android.animation.ObjectAnimator;
-        import android.animation.ValueAnimator;
-        import android.content.Context;
-        import android.content.res.AssetManager;
-        import android.graphics.Typeface;
-        import android.graphics.drawable.ClipDrawable;
-        import android.os.Bundle;
-        import android.support.v7.app.ActionBarActivity;
-        import android.view.Gravity;
-        import android.view.View;
-        import android.view.View.OnClickListener;
-        import android.widget.Button;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.ClipDrawable;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-        import java.util.Calendar;
-        import java.util.TimeZone;
+import java.util.Calendar;
+import java.util.TimeZone;
 
-        import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-        import static com.example.pc.testeverything.DateUtil.getUnixTimeByCalendar;
+import static com.example.pc.testeverything.DateUtil.getUnixTimeByCalendar;
 
-public class PropertyAnimation extends ActionBarActivity {
+public class PropertyAnimation extends Activity {
 
     private TextView textview ;
     private Button scaleX ;

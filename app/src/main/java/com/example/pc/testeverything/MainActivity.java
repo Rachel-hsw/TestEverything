@@ -46,7 +46,7 @@ private TextView text;
                     @Override
                     public void run() {
                         Log.i("testhsw","主线程2");
-                      /*  Toast.makeText(MainActivity.this, "hah"+i, Toast.LENGTH_SHORT).show();*/
+                        /*  Toast.makeText(OtgActivity.this, "hah"+i, Toast.LENGTH_SHORT).show();*/
                         text= (TextView) findViewById(R.id.mymytext);
                         text.setText(String.valueOf(i));
                     }

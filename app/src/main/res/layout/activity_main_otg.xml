@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/u_disk_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="输入要保存到U盘中的文字内容" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_weight="2"
+            android:id="@+id/u_disk_write"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="往U盘中写入数据" />
+
+        <Button
+            android:layout_weight="2"
+            android:id="@+id/u_disk_read"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="从U盘中读取数据" />
+
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/install"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="安装" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/u_disk_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hsw"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

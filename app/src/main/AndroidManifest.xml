@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pc.testeverything">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -11,52 +12,22 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <application
-        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/fox"
         android:debuggable="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity">
-<!--
-        <activity android:name=".PropertyAnimationActivity">
--->
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.QRcodeActivity" />
-        <activity android:name=".WebviewActivity" />
-        <activity android:name=".AlertDialogActivity" />
-        <activity android:name=".DialogActivity"
-            android:theme="@style/CustomActivityDialogStyle"/>
-        <activity android:name=".Activity.MainFragmentActivity" />
-        <activity android:name=".Activity.OkHttpActivity" />
-        <activity android:name=".Activity.culActivity" />
-        <activity android:name=".Activity.main.SoundPoolActivity" />
-        <activity android:name=".Activity.SettingActivity" />
-        <activity android:name=".Activity.SettingsActivity" />
-        <activity android:name=".Activity.BraodCastActivity" />
-        <activity android:name=".Activity.PropertyAnimationActivity" />
-        <activity android:name=".viewpager.ViewpagerActivity" />
-        <activity android:name=".Recyclerview.RecycleViewTwoActivity" />
-        <activity android:name=".gridview.GridViewActivity" />
-        <activity android:name=".Activity.PopWindowActivity" />
-        <activity android:name=".Activity.QuanJuDialogActivity" />
 
-        <receiver android:name=".BroadcastReceiver.RootBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.category.APP_CALCULATOR" />
-                <action android:name="android.intent.category.APP_EMAIL" />
-            </intent-filter>
-        </receiver>
-        <service android:name=".MyService" />
-        <!-- Mqtt Service -->
-        <service android:name="org.eclipse.paho.android.service.MqttService" />
     </application>
 
 </manifest>

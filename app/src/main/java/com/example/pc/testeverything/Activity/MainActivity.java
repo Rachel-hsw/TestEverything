@@ -54,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
             new Fruit("9属性动画研究", R.mipmap.fox), new Fruit("10ViewPager", R.mipmap.fox),
             new Fruit("11RecyclerView嵌套RecylerView", R.mipmap.fox), new Fruit("12网格", R.mipmap.fox),
             new Fruit("13popwindow", R.mipmap.fox), new Fruit("14全局对话框", R.mipmap.fox),
-            new Fruit("15测试", R.mipmap.fox)
+            new Fruit("15U盘libaums", R.mipmap.fox),
+            new Fruit("16程序开始动画", R.mipmap.fox),
+            new Fruit("呼吸灯", R.mipmap.fox)
+
     };
 
     private List<Fruit> fruitList = new ArrayList<>();

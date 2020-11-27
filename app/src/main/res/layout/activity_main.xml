@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.pc.testeverything.Activity.QRcodeActivity">
-<com.example.pc.testeverything.Activity.main.TitleLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-   />
+
+    <com.example.pc.testeverything.Activity.main.TitleLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
         android:id="@+id/mymytext"
-        />
-    <Button
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="点击我"
-        android:id="@+id/button" />
+        android:layout_height="wrap_content"
+        android:text="Hello World!" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击我" />
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.example.pc.testeverything.Test
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

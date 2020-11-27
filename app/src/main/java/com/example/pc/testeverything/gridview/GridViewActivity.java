@@ -10,6 +10,7 @@ import com.example.pc.testeverything.R;
 import com.example.pc.testeverything.Recyclerview.OrderDetail;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -44,12 +45,13 @@ public class GridViewActivity extends AppCompatActivity {
         gridview.setAdapter(myGridView);*/
 
         orderDetailList = initOders();
-        for (OrderDetail orderDetail : orderDetailList) {
+        Iterator iterator = orderDetailList.iterator();
+        while (iterator.hasNext()) {
+            OrderDetail orderDetail = (OrderDetail) iterator.next();
             if (orderDetail.getDetailNumber().equals("2")) {
-                orderDetailList.remove(orderDetail);
+                iterator.remove();
             }
         }
-
     }
 
     private List<OrderDetail> initOders() {

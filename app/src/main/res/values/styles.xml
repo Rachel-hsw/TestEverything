@@ -20,4 +20,49 @@
         <!--是否有标题栏-->
         <item name="android:windowNoTitle">true</item>
     </style>
+
+    <declare-styleable name="BreatheView">
+        <attr name="insideViewWidth" format="dimension" /> <!--内部TextView的宽度-->
+        <attr name="insideViewHeight" format="dimension" /> <!--内部TextView的高度-->
+
+        <attr name="lightDiffusionWidth" format="dimension" /> <!--光扩散的间距-->
+
+        <attr name="BreatheViewTextSize" format="dimension" />  <!--设置文字的大小-->
+        <attr name="BreatheViewTextColor" format="color" />  <!--设置文字的颜色-->
+        <attr name="BreatheViewText" format="string" /> <!--控件的文字-->
+
+        <attr name="BreatheViewInsideColor" format="color" />  <!--设置内部View的颜色-->
+
+        <attr name="BreatheViewIsLight" format="boolean" /> <!--设置控件是否扩散-->
+
+    </declare-styleable>
+
+
+    <style name="StateLl">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ColorTV">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black333</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TipTv">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black333</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

@@ -20,15 +20,18 @@ import com.example.pc.testeverything.Activity.QRcodeActivity;
 import com.example.pc.testeverything.Activity.QuanJuDialogActivity;
 import com.example.pc.testeverything.Activity.SettingsActivity;
 import com.example.pc.testeverything.Activity.TestLayoutActivity;
-import com.example.pc.testeverything.viewpager.ViewpagerActivity;
+import com.example.pc.testeverything.Activity.UsbActivity;
 import com.example.pc.testeverything.Activity.culActivity;
+import com.example.pc.testeverything.AnimationActivity;
+import com.example.pc.testeverything.BreathActivity;
 import com.example.pc.testeverything.R;
 import com.example.pc.testeverything.Recyclerview.RecycleViewTwoActivity;
 import com.example.pc.testeverything.gridview.GridViewActivity;
+import com.example.pc.testeverything.viewpager.ViewpagerActivity;
 
 import java.util.List;
 
-public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
+public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> {
 
     private static final String TAG = "FruitAdapter";
 
@@ -65,36 +68,36 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
                 Fruit fruit = mFruitList.get(position);
-                switch (position){
+                switch (position) {
                     case 0:
                         //二维码
-                        Intent intent = new Intent(mContext,  QRcodeActivity.class);
+                        Intent intent = new Intent(mContext, QRcodeActivity.class);
                         mContext.startActivity(intent);
 
                         break;
                     case 1:
                         //约束布局
-                        Intent intent1 = new Intent(mContext,  TestLayoutActivity.class);
+                        Intent intent1 = new Intent(mContext, TestLayoutActivity.class);
                         mContext.startActivity(intent1);
                         break;
                     case 2:
                         //下单
-                        Intent intent2 = new Intent(mContext,  OkHttpActivity.class);
+                        Intent intent2 = new Intent(mContext, OkHttpActivity.class);
                         mContext.startActivity(intent2);
                         break;
                     case 3:
                         //碎片
-                        Intent intent3 = new Intent(mContext,  MainFragmentActivity.class);
+                        Intent intent3 = new Intent(mContext, MainFragmentActivity.class);
                         mContext.startActivity(intent3);
                         break;
                     case 4:
                         //计算器
-                        Intent intent4 = new Intent(mContext,  culActivity.class);
+                        Intent intent4 = new Intent(mContext, culActivity.class);
                         mContext.startActivity(intent4);
                         break;
                     case 5:
                         //添加声音
-                        Intent intent5 = new Intent(mContext,  SoundPoolActivity.class);
+                        Intent intent5 = new Intent(mContext, SoundPoolActivity.class);
                         mContext.startActivity(intent5);
                         break;
                     case 6:
@@ -133,10 +136,25 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>{
                         mContext.startActivity(intent12);
                         break;
                     case 13:
-                        //13popwindow
+                        //全局对话框
                         Intent intent13 = new Intent(mContext, QuanJuDialogActivity.class);
                         mContext.startActivity(intent13);
+                    case 14:
+                        //测试U盘读写
+                        Intent intent14 = new Intent(mContext, UsbActivity.class);
+                        mContext.startActivity(intent14);
                         break;
+                    case 15:
+                        //程序进入时的动画
+                        Intent intent15 = new Intent(mContext, AnimationActivity.class);
+                        mContext.startActivity(intent15);
+                        break;
+                    case 16:
+                        //呼吸灯
+                        Intent intent16 = new Intent(mContext, BreathActivity.class);
+                        mContext.startActivity(intent16);
+                        break;
+                    default:
                 }
                /* Intent intent = new Intent(mContext, FruitActivity.class);
                 intent.putExtra(FruitActivity.FRUIT_NAME, fruit.getName());

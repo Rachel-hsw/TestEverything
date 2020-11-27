@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="#FFF4F5F9"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/welcome_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="384dp"
+        android:layout_marginLeft="384dp"
+        android:layout_marginTop="310dp"
+        android:text="Welcome to"
+        android:textColor="#ff333333"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:alpha="0"
+        android:id="@+id/pcr_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Real-time PCR System"
+        android:textColor="#80666666"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@id/welcome_tv"
+        app:layout_constraintTop_toBottomOf="@id/welcome_tv" />
+
+    <ImageView
+        android:alpha="0"
+        android:id="@+id/blue_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="628dp"
+        android:layout_marginTop="278dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/circle_blue" />
+
+    <ImageView
+        android:id="@+id/gray_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="484dp"
+        android:layout_marginTop="260dp"
+        android:layout_width="190dp"
+        android:alpha="0"
+        android:layout_height="190dp"
+        android:src="@mipmap/circle_grey" />
+</android.support.constraint.ConstraintLayout>

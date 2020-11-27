@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="颜色"
+            android:textColor="#FF333333"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="状态"
+            android:textColor="#FF333333"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="说明"
+            android:textColor="#FF333333"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ColorTV"
+            android:text="红色" />
+
+        <LinearLayout style="@style/StateLl">
+
+            <ImageView
+                android:backgroundTint="#FF0000"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_lens_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="常亮"
+                android:textColor="#FF333333"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TipTv"
+            android:text="配网流程失败" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ColorTV"
+            android:text="红色"
+            android:visibility="invisible" />
+
+        <LinearLayout style="@style/StateLl">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:backgroundTint="#FF0000"
+                android:onClick="imageSize"
+                android:src="@drawable/ic_lens_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="闪烁"
+                android:textColor="#FF333333"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TipTv"
+            android:text="设备故障" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ColorTV"
+            android:text="绿色" />
+
+        <LinearLayout style="@style/StateLl">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:onClick="imageSize"
+                android:src="@drawable/ic_lens_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="常亮"
+                android:textColor="#FF333333"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TipTv"
+            android:text="设备已连接到AP,并已与用户绑定" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ColorTV"
+            android:text="绿色"
+            android:visibility="invisible" />
+
+        <LinearLayout style="@style/StateLl">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:onClick="imageSize"
+                android:src="@drawable/ic_lens_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="闪烁"
+                android:textColor="#FF333333"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TipTv"
+            android:text="设备进入配网状态" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ColorTV"
+            android:text="绿色"
+            android:visibility="invisible" />
+
+        <LinearLayout style="@style/StateLl">
+
+            <ImageView
+                android:id="@+id/image_scale"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_lens_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="呼吸"
+                android:textColor="#FF333333"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+
+            style="@style/TipTv"
+            android:text="设备正在执行流程" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ColorTV"
+            android:text="黄色" />
+
+        <LinearLayout style="@style/StateLl">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:backgroundTint="#FFFF00"
+                android:onClick="imageSize"
+                android:src="@drawable/ic_lens_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="常亮"
+                android:textColor="#FF333333"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TipTv"
+            android:text="设备已连接到AP,但尚未与用户绑定" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/ColorTV"
+            android:text="红绿交替" />
+
+        <LinearLayout style="@style/StateLl">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:backgroundTint="#FFFF00"
+                android:onClick="imageSize"
+                android:src="@drawable/ic_lens_black_24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="常亮"
+                android:textColor="#FF333333"
+                android:textSize="14sp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TipTv"
+            android:text="设备正在尝试连接AP" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/test2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:onClick="imageSize"
+        android:src="@drawable/ic_lens_black_24dp" />
+
+    <ImageView
+        android:id="@+id/test3"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:onClick="imageSize"
+        android:src="@drawable/ic_lens_black_24dp" />
+
+
+</LinearLayout>
